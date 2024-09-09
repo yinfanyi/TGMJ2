@@ -1,0 +1,19 @@
+.ipynb_checkpoints
+.pytest_cache
+__pycache__
+venv
+.idea
+# tests/
+record/
+# data/npz/
+# data/xml/
+# data/csv/
+# data/xlsx/
+# data/videos/
+# data/png/
+
+
+other/
+dist/
+tnsgrt.egg-info/
+.vscode
