@@ -7,7 +7,7 @@ venv
 record/
 # data/npz/
 # data/xml/
-# data/csv/
+data/csv/output*
 # data/xlsx/
 # data/videos/
 # data/png/

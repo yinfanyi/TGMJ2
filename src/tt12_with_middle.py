@@ -65,7 +65,7 @@ class TT12WithMiddle(Tensegrity):
                                  'to_node_label':to_node_label, 'label':label})
 
     # @overload 有了中点
-    def fill_Bar_data(self):
+    def fill_Bar_data(self, bar_mass=0.0225):
         if self.C_b is None or self.C_s is None or self.N is None:
             print('数据不完全')
             return False
@@ -73,14 +73,14 @@ class TT12WithMiddle(Tensegrity):
         for j in range(B.shape[1]):
             x_str= str(np.argmax(self.C_b[j, :] == -1))
             y_str = str(np.argmax(self.C_b[j, :] == 1))
-            self.add(self.generate_Bar_element(mass=0.08, density=0,
+            self.add(self.generate_Bar_element(mass=bar_mass, density=0,
                                             from_node_label=f'node_{x_str}',
                                             to_node_label=f'node_{y_str}',
                                             alt_node_label=self.alt_node_label_list[j],
                                             label=f'bar_{x_str}_{y_str}'))
     
     # @overload 张拉整体结构的弹簧刚度有两种
-    def fill_String_data(self, stiffness1, stiffness2):
+    def fill_String_data(self, stiffness1, stiffness2, ori_length_1 = 0.22, ori_length_2 = 0.10):
         if self.C_b is None or self.C_s is None or self.N is None:
             print('数据不完全')
             return False
@@ -90,11 +90,11 @@ class TT12WithMiddle(Tensegrity):
             if self.strut2strut_string_stiffness_type[j] == 1:
                 stiffness = stiffness1
                 color = '1 0.5 0.5 0.7'
-                ori_length = 0.22
+                ori_length = ori_length_1
             else:
                 stiffness = stiffness2
                 color = '0.7 0 0 0.7'
-                ori_length = 0.10
+                ori_length = ori_length_2
             self.add(self.generate_String_element(stiffness=stiffness,
                                                 ori_length=ori_length,
                                                 color=color,
@@ -102,10 +102,10 @@ class TT12WithMiddle(Tensegrity):
                                                 to_node_label=f'node_{np.argmax(self.C_s[j, :] == 1)}',
                                                 label=f'string_{np.argmax(self.C_s[j, :] == -1)}_{np.argmax(self.C_s[j, :] == 1)}'))
         
-    def fill_TT_Mid_connected_String_data(self):
+    def fill_TT_Mid_connected_String_data(self, stiffness=67000, ori_length=0.17):
         for i in range(self.TT_mid_connected_array.shape[0]):
-            self.add(self.generate_String_element(stiffness=67000,
-                                                ori_length=0.17,
+            self.add(self.generate_String_element(stiffness=stiffness,
+                                                ori_length=ori_length,
                                                 color='1 1 0 0.7',
                                                 from_node_label=f'node_{self.TT_mid_connected_array[i,0]-1}',
                                                 to_node_label=f'node_{self.TT_mid_connected_array[i,1]-1}',
@@ -141,9 +141,9 @@ class TT12WithMiddle(Tensegrity):
                                             middle_node_label=self.sphere_central_node_label_list[1],
                                             label='Inside_sphere'))
     
-    def fill_all_data(self):
+    def fill_all_data(self, bar_mass=0.0225,stiffness3=67000, ori_length_1=0.22, ori_length_2=0.10, ori_length_3=0.17):
         super().fill_Node_data()
-        self.fill_Bar_data()
-        self.fill_String_data(stiffness1=771, stiffness2=2000)
-        self.fill_TT_Mid_connected_String_data()
+        self.fill_Bar_data(bar_mass=bar_mass)
+        self.fill_String_data(stiffness1=771, stiffness2=2000, ori_length_1=ori_length_1, ori_length_2=ori_length_2)
+        self.fill_TT_Mid_connected_String_data(stiffness=stiffness3, ori_length=ori_length_3)
         self.fill_Ball_data()
