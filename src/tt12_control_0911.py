@@ -31,8 +31,9 @@ sys.path.append(src_dir)
 
 class TT12_MJCF():
     def __init__(self) -> None:
-        self._time_step = 0.001
+        self._time_step = 0.0001
         self._gravity = '0 0 -10'
+        self.initial_time_step = 0.0001
 
         self._floor_solimp = '0.269 0.071 0.065 0.5 2'
         self._floor_solref = '-5773.1 -68.76'
@@ -122,7 +123,7 @@ class TT12_MJCF():
         self.mjcf_model.compiler.inertiafromgeom = "true"
         self.mjcf_model.compiler.autolimits = "true"
 
-        self.mjcf_model.option.timestep = self._time_step
+        self.mjcf_model.option.timestep = self.initial_time_step
         # self.mjcf_model.option.integrator = 'RK4'
         self.mjcf_model.option.integrator = 'Euler'
         self.mjcf_model.option.gravity = self._gravity
@@ -158,7 +159,7 @@ class TT12_MJCF():
                                               height=300, rgb1=[.2, .3, .4], rgb2=[.1, .2, .3])
         grid = self.mjcf_model.asset.add('material', name='grid', texture=chequered, texrepeat=[5, 5], reflectance=.2)
         self.mjcf_model.worldbody.add('geom', name='floor', 
-                                      type='plane', size=[0, 0, .125], 
+                                      type='plane', size=[0, 0, .125], condim='6',
                                       material=grid,
                                       friction=self._floor_friction,
                                       solimp=self._floor_solimp,
@@ -246,12 +247,12 @@ class TT12_MJCF():
             elif self.bar_edge_shape == 'sphere':
                 new_model.worldbody.add('geom', 
                                     name=f'geom_edge_{x_str}', type='sphere', 
-                                    pos=from_point_coords_local_str, mass=str(0.0113), 
+                                    pos=from_point_coords_local_str, mass=str(0.0113), condim='6',
                                     size='0.03', rgba="0 0.9 0 0.5")
                 
                 new_model.worldbody.add('geom', 
                                     name=f'geom_edge_{y_str}', type='sphere', 
-                                    pos=to_point_coords_local_str, mass=str(0.0113), 
+                                    pos=to_point_coords_local_str, mass=str(0.0113), condim='6',
                                     size='0.03', rgba="0 0.9 0 0.5")
             
             attachment_frame = bar_middle_site.attach(new_model)
@@ -421,7 +422,7 @@ class TT12_MJCF():
     @time_step.setter
     def time_step(self, time_step):
         self._time_step = time_step
-        self.mjcf_model.option.timestep = self._time_step
+        # self.mjcf_model.option.timestep = self._time_step
 
     @property
     def gravity(self):
@@ -495,6 +496,28 @@ class TT12_MJCF():
                 frameangvel.attrib['refname'] = 'world_site'
         self.prettify(root)
         tree.write(xml_path, encoding='utf-8', xml_declaration=True)
+    
+    def correct_keyframe(self, xml_path:str):
+        model = mj.MjModel.from_xml_path(xml_path)
+        data = mj.MjData(model)
+        mj.mj_resetData(model, data)
+        while data.time < 1:
+            mj.mj_step(model, data)
+        # print(data.qpos)
+        tree = ET.parse(xml_path)
+        root = tree.getroot()
+        keyframe = root.find('keyframe')
+        for key in keyframe.findall('key'):
+            name = key.attrib.get('name')
+            if name.endswith('initial_state'):
+                key.attrib['qpos'] = ' '.join(map(str, data.qpos))
+        option = root.find('option')
+        option.attrib['timestep'] = str(self.time_step)
+        self.prettify(root)
+        tree.write(xml_path, encoding='utf-8', xml_declaration=True)
+
+
+
 
     def export_to_xml_file(self, export_xml_file_path:str, file_name:str):
         # xml_string = self.mjcf_model.to_xml_string()
@@ -504,6 +527,7 @@ class TT12_MJCF():
         xml_path = export_xml_file_path + file_name
         self.delete_external_body(xml_path)
         self.correct_sensor_refname(xml_path)
+        self.correct_keyframe(xml_path)
 
 class record_data():
     def __init__(self) -> None:
@@ -670,10 +694,20 @@ class TT12_Control():
     def controller(self):
         velocity_x_actuator_id = mj.mj_name2id(self.model, mj.mjtObj.mjOBJ_ACTUATOR, "tt_model_0/velocity_x_ctrl")
         torque_x_actuator_id = mj.mj_name2id(self.model, mj.mjtObj.mjOBJ_ACTUATOR, "tt_model_0/torque_x_ctrl")
-
+        # self.data.xfrc_applied[13, :] = [0,0,0,-100,0,0]
         if abs(self.data.sensor('tt_model_0/angvel_inside_ball').data[0] - self.data.sensor('tt_model_0/angvel_outside_ball').data[0]) < 0.1:
             self.data.ctrl[torque_x_actuator_id] = 0
-
+            self.set_velocity_servo("tt_model_0/velocity_x_ctrl", 100)
+            self.data.ctrl[torque_x_actuator_id] = 0
+            # self.data.xfrc_applied[13, :] = [0,0,0,0,0,0]
+        # if self.data.time > 0.6:
+            # self.data.xfrc_applied[13, :] = [0,0,0,0,0,0]
+        return
+        if self.data.time < 0.045:
+            self.data.xfrc_applied[13, :] = [0,0,0,100,0,0]
+        else:
+            self.data.xfrc_applied[13, :] = [0,0,0,0,0,0]
+        
     def reload(self):
         self.model = mj.MjModel.from_xml_path(self.xml_path)  # MuJoCo model
         self.data = mj.MjData(self.model)                # MuJoCo data

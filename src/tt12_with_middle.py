@@ -29,7 +29,7 @@ from tensegrity import Tensegrity
 from xlsxConverter import XLSXConverter
 
 class TT12WithMiddle(Tensegrity):
-    def __init__(self, xlsx_path, param_length_1=0.7, param_length_2=0.35, param_length_3=0, param_length_4=0.7, radius=0.2):        
+    def __init__(self, xlsx_path, param_length_1=0.7, param_length_2=0.35, param_length_3=0, param_length_4=0.7, radius=0.2, displacement=(0,0,1)):        
 
         self.radius = radius
         xlsxConverter = XLSXConverter(xlsx_path)
@@ -46,7 +46,7 @@ class TT12WithMiddle(Tensegrity):
         self.sphere_central_node_label_list = xlsxConverter.get_sphere_central_node_label_list()
         self.strut2strut_string_stiffness_type = xlsxConverter.get_TT_strut2strut_string_stiffness_type(sheet_name='cables_strut_to_strut')
         super().__init__(N, Cb_in, Cs_in)
-        self.move_nodes(0, 0, 1)
+        self.move_nodes(displacement[0], displacement[1], displacement[2])
     
     def generate_shpere_element(self, mass, density, radius, middle_node_label:str, connected_node_label_list:Optional[List[str]]=None, label:Optional[str]=None):
         return self.create_item('Ball', 
