@@ -24,7 +24,6 @@ from dm_control import mjcf
 from xlsxConverter import XLSXConverter
 from tt12_with_middle import TT12WithMiddle
 
-
 current_dir = os.path.dirname(os.path.abspath(__file__))
 src_dir = os.path.join(current_dir, '..', 'src')
 sys.path.append(src_dir)
@@ -39,6 +38,8 @@ class TT12_MJCF():
         self._floor_solref = '-5773.1 -68.76'
         self._floor_friction = "0.5 0.005 0.0001"
         self._floor_pos = '0 0 0'
+        self.tongue = -90
+        self.initial_velocity = 70
 
         self.bar_edge_shape = None
 
@@ -336,8 +337,8 @@ class TT12_MJCF():
                 tt_model.contact.add('exclude', name=f'exclude_{body1}_{body2}', body1=f'{body1}/', body2=f'{body2}/')
     
     def add_actuator(self, tt_model:mjcf.element.RootElement):
-        tt_model.actuator.add('motor',name="torque_x_ctrl", joint="middle_platform/x_control", gear="1", ctrlrange="-100 100", ctrllimited="true")
-        tt_model.actuator.add('velocity',name="velocity_x_ctrl", joint="middle_platform/x_control", kv="0", ctrlrange="-100 100")
+        tt_model.actuator.add('motor',name="torque_x_ctrl", joint="middle_platform/x_control", gear="1", ctrlrange="-200 200", ctrllimited="true")
+        tt_model.actuator.add('velocity',name="velocity_x_ctrl", joint="middle_platform/x_control", kv="0", ctrlrange="-200 200")
     
     def add_sensor(self, tt_model:mjcf.element.RootElement):
         tt_model.sensor.add('framepos',name="pos_outside_ball", objtype="body", objname="middle_platform/", reftype="site", refname="world_site")
@@ -355,14 +356,15 @@ class TT12_MJCF():
     
     def add_keyframe(self, tt_model:mjcf.element.RootElement):
         qpos = "0.179416 0.179418 0.365036 0.976395 -5.81186e-05 9.11291e-05 0.21599 -0.179416 0.179418 0.365036 0.976395 -5.81186e-05 -9.11291e-05 -0.21599 -0.179416 -0.179415 0.365036 0.802284 1.56984e-05 -0.000106937 0.596943 0.179416 -0.179415 0.365036 0.802284 1.56984e-05 0.000106937 -0.596943 0.179421 1.72124e-06 0.544061 1 -2.92112e-11 2.67372e-07 -3.52729e-10 0.179412 1.7212e-06 0.185228 1 -4.24989e-11 2.44424e-07 4.32981e-10 -0.179412 1.7212e-06 0.185228 1 -4.24987e-11 -2.44424e-07 -4.32971e-10 -0.179421 1.72124e-06 0.544061 1 -2.92113e-11 -2.67372e-07 3.52739e-10 0 0.179422 0.544061 1 0 0 0 0 -0.179419 0.544061 1 0 0 0 0 -0.17941 0.185228 1 0 0 0 0 0.179414 0.185228 1 0 0 0 0 1.72122e-06 0.364638 1 -4.643e-11 0 0 822.353 0 0"
-        qvel="0 6.97298e-08 0 1.45504e-12 0 0.0307 0 6.97298e-08 0 1.42426e-12 0 -0.0307 0 6.97298e-08 0 -1.72408e-12 0 0.082786 0 6.97298e-08 0 -1.70478e-12 0 -0.082786 0 6.97298e-08 0 0 0 0 0 6.97298e-08 0 0 0 0 0 6.97298e-08 0 0 0 0 0 6.97298e-08 0 0 0 0 0 6.97298e-08 0 0 0 0 0 6.97298e-08 0 0 0 0 0 6.97298e-08 0 0 0 0 0 6.97298e-08 0 0 0 0 0 6.97298e-08 0 0 0 0 70 0 0" 
-        ctrl="-100 0"
+        qvel = " ".join(["0"] * 78)
+        qvel = qvel + f' {self.initial_velocity} 0 0'
+        ctrl = f"{self.tongue} 0"
         tt_model.keyframe.add('key', name='initial_state', time='0', qpos=qpos, qvel=qvel, ctrl=ctrl)
 
         qpos='0.17933 0.223141 0.274582 0.920472 -0.386277 0.023045 0.0546742 -0.17933 0.223141 0.274582 0.920472 -0.386277 -0.023045 -0.0546742 -0.179412 -0.0309028 0.527741 0.907542 -0.377382 -0.0707502 -0.170131 0.179412 -0.0309028 0.527741 0.907542 -0.377382 0.0707502 0.170131 0.179412 0.223032 0.527741 0.924406 -0.381409 1.87586e-05 -3.10178e-06 0.17933 -0.0310121 0.274582 0.92557 -0.378366 0.0117246 -0.00469259 -0.17933 -0.0310121 0.274582 0.92557 -0.378366 -0.0117246 0.00469259 -0.179412 0.223032 0.527741 0.924406 -0.381409 -1.87641e-05 3.10404e-06 9.57909e-13 0.349963 0.400962 1 4.00996e-14 1.09915e-15 -7.35262e-12 -2.77579e-12 0.0960647 0.654625 1 5.8886e-14 1.05046e-15 -7.35306e-12 -6.50961e-12 -0.157834 0.400962 1 -3.76275e-14 6.27321e-16 -7.35271e-12 -2.77591e-12 0.0960647 0.147512 1 5.11088e-14 4.47506e-17 -7.35383e-12 -2.77586e-12 0.0960647 0.400984 0.92388 -0.382683 2.81394e-12 -6.79313e-12 -349.074 2.37314e-11 -5.88057e-12'
         qvel = " ".join(["0"] * 78)
-        qvel = qvel + ' 70 0 0'
-        ctrl="-100 0"
+        qvel = qvel + f' {self.initial_velocity} 0 0'
+        ctrl = "-100 0"
         tt_model.keyframe.add('key', name='initial_state1', time='0', qpos=qpos, qvel=qvel, ctrl=ctrl)
 
     def set_model_suspended_in_the_air(self):
@@ -497,29 +499,28 @@ class TT12_MJCF():
         self.prettify(root)
         tree.write(xml_path, encoding='utf-8', xml_declaration=True)
     
-    def correct_keyframe(self, xml_path:str):
-        model = mj.MjModel.from_xml_path(xml_path)
-        data = mj.MjData(model)
-        mj.mj_resetData(model, data)
-        while data.time < 1:
-            mj.mj_step(model, data)
-        # print(data.qpos)
+    def correct_keyframe(self, xml_path:str, is_correct_keyframe=True):
         tree = ET.parse(xml_path)
         root = tree.getroot()
-        keyframe = root.find('keyframe')
-        for key in keyframe.findall('key'):
-            name = key.attrib.get('name')
-            if name.endswith('initial_state'):
-                key.attrib['qpos'] = ' '.join(map(str, data.qpos))
+
+        if is_correct_keyframe:
+            model = mj.MjModel.from_xml_path(xml_path)
+            data = mj.MjData(model)
+            mj.mj_resetData(model, data)
+            while data.time < 1:
+                mj.mj_step(model, data)
+        # print(data.qpos)
+            keyframe = root.find('keyframe')
+            for key in keyframe.findall('key'):
+                name = key.attrib.get('name')
+                if name.endswith('initial_state'):
+                    key.attrib['qpos'] = ' '.join(map(str, data.qpos))
         option = root.find('option')
         option.attrib['timestep'] = str(self.time_step)
         self.prettify(root)
         tree.write(xml_path, encoding='utf-8', xml_declaration=True)
 
-
-
-
-    def export_to_xml_file(self, export_xml_file_path:str, file_name:str):
+    def export_to_xml_file(self, export_xml_file_path:str, file_name:str, is_correct_keyframe=True):
         # xml_string = self.mjcf_model.to_xml_string()
         mjcf.export_with_assets(self.mjcf_model, 
                                 export_xml_file_path, 
@@ -527,7 +528,7 @@ class TT12_MJCF():
         xml_path = export_xml_file_path + file_name
         self.delete_external_body(xml_path)
         self.correct_sensor_refname(xml_path)
-        self.correct_keyframe(xml_path)
+        self.correct_keyframe(xml_path, is_correct_keyframe)
 
 class record_data():
     def __init__(self) -> None:
@@ -677,6 +678,8 @@ class TT12_Control():
         else:
             mj.mj_resetDataKeyframe(self.model, self.data, self.keyframe_id)
         # mj.mj_resetData(self.model, self.data)
+        velocity_x_actuator_id = mj.mj_name2id(self.model, mj.mjtObj.mjOBJ_ACTUATOR, "tt_model_0/velocity_x_ctrl")
+        self.set_velocity_servo("tt_model_0/velocity_x_ctrl", 0)
         mj.mj_forward(self.model, self.data)
     
     def set_velocity_servo(self, actuator_name, kv):
@@ -698,8 +701,11 @@ class TT12_Control():
         if abs(self.data.sensor('tt_model_0/angvel_inside_ball').data[0] - self.data.sensor('tt_model_0/angvel_outside_ball').data[0]) < 0.1:
             self.data.ctrl[torque_x_actuator_id] = 0
             self.set_velocity_servo("tt_model_0/velocity_x_ctrl", 100)
-            self.data.ctrl[torque_x_actuator_id] = 0
+            self.data.ctrl[velocity_x_actuator_id] = 0
             # self.data.xfrc_applied[13, :] = [0,0,0,0,0,0]
+            # print('time: ', self.data.time)
+        # else:
+        #     self.set_velocity_servo("tt_model_0/velocity_x_ctrl", 0)
         # if self.data.time > 0.6:
             # self.data.xfrc_applied[13, :] = [0,0,0,0,0,0]
         return
@@ -821,6 +827,327 @@ class TT12_Control():
             return m, d
         mj_viewer.launch(loader=load_callback)
 
+def cal_ori_length(z=165, f1=100, f2=290, length1=0.35, length2=0.35/2*np.sqrt(2), length3=np.sqrt(175**2+165**2)*0.001):
+    a=350/2
+    f3 = (f2/np.sqrt(2) - f1)*2*np.sqrt(a**2+z**2)/(a-z)
+    # print(f3)
+    stiffness1 = 771  # N/m    
+    stiffness2 = 2000
+    stiffness3 = 67000
+
+    dx1 = f1/stiffness1
+    dx2 = f2/stiffness2
+    dx3 = f3/stiffness3
+    ori_length1 = abs(dx1-length1)
+    ori_length2 = abs(dx2-length2)
+    ori_length3 = abs(dx3-length3)
+    return ori_length1, ori_length2, ori_length3
+
+def process_z(z, index, folder_name='0913_z'):  
+    xlsx_path = './data/xlsx/topology_TSR_flexible_strut_ball_foot_v1_R.xlsx'
+    csv_path = f'./data/csv/{folder_name}/specific_{index}.csv'  
+    export_xml_file_path = f'./data/xml/{folder_name}/'  
+    export_xml_file_name = f"TT12_0911_{index}.xml"  
+    xml_path = export_xml_file_path + export_xml_file_name  
+    save_data_csv = f'./data/csv/output{folder_name}/output_{index}.csv'  
+
+    param_length_4 = (175 + z) * 2 * 0.001  
+
+    # 创建 TT12WithMiddle 实例并处理数据  
+    tt12 = TT12WithMiddle(xlsx_path, param_length_4=param_length_4, displacement=(0, 0, 0.38))  
+    length_3 = np.sqrt(175 ** 2 + z ** 2) * 0.001
+    ori_length_1, ori_length_2, ori_length_3 = cal_ori_length(z=z, length3=length_3)  
+    tt12.fill_all_data(ori_length_1=ori_length_1, ori_length_2=ori_length_2, ori_length_3=ori_length_3)  
+    tt12.export_to_csv(csv_path)  
+
+    # 创建 TT12_MJCF 实例并生成模型  
+    tt12_mjcf = TT12_MJCF()  
+    tt12_mjcf.time_step = 0.00001
+    tt12_mjcf.generate_tt_model(csv_path, tt_model_name='tt_model_0', pos=(0, 0, 0))  
+    tt12_mjcf.export_to_xml_file(export_xml_file_path, export_xml_file_name)  
+
+    # 创建 TT12_Control 实例并进行仿真  
+    tt12_control = TT12_Control(xml_path, keyframe_id=0)  
+    tt12_control.Hz = 200  
+    tt12_control.is_control = True  
+    tt12_control.simulate(is_render=False, stop_time=1)  
+    tt12_control.recorded_data.save_data(save_data_csv)
+
+def process_f1(f1, index, folder_name='0913_f1'):  
+    xlsx_path = './data/xlsx/topology_TSR_flexible_strut_ball_foot_v1_R.xlsx'
+    csv_path = f'./data/csv/{folder_name}/specific_{index}.csv'  
+    export_xml_file_path = f'./data/xml/{folder_name}/'  
+    export_xml_file_name = f"TT12_0911_{index}.xml"  
+    xml_path = export_xml_file_path + export_xml_file_name  
+    save_data_csv = f'./data/csv/output{folder_name}/output_{index}.csv'   
+    z = 165
+    ori_length1, ori_length2, ori_length3 = cal_ori_length(z=165, f1=f1, f2=290)
+    param_length_4 = (175 + z) * 2 * 0.001  
+
+    # 创建 TT12WithMiddle 实例并处理数据  
+    tt12 = TT12WithMiddle(xlsx_path, param_length_4=param_length_4, displacement=(0, 0, 0.38))  
+    tt12.fill_all_data(ori_length_1=ori_length1, ori_length_2=ori_length2, ori_length_3=ori_length3)  
+    tt12.export_to_csv(csv_path)  
+
+    # 创建 TT12_MJCF 实例并生成模型  
+    tt12_mjcf = TT12_MJCF()  
+    tt12_mjcf.time_step = 0.00001  
+    tt12_mjcf.generate_tt_model(csv_path, tt_model_name='tt_model_0', pos=(0, 0, 0))  
+    tt12_mjcf.export_to_xml_file(export_xml_file_path, export_xml_file_name)  
+
+    # 创建 TT12_Control 实例并进行仿真  
+    tt12_control = TT12_Control(xml_path, keyframe_id=0)  
+    tt12_control.Hz = 200  
+    tt12_control.is_control = True  
+    tt12_control.simulate(is_render=False, stop_time=1)  
+    tt12_control.recorded_data.save_data(save_data_csv)
+
+def process_f2(f2, index, folder_name='0913_f2'):  
+    xlsx_path = './data/xlsx/topology_TSR_flexible_strut_ball_foot_v1_R.xlsx'
+    csv_path = f'./data/csv/{folder_name}/specific_{index}.csv'  
+    export_xml_file_path = f'./data/xml/{folder_name}/'  
+    export_xml_file_name = f"TT12_0911_{index}.xml"  
+    xml_path = export_xml_file_path + export_xml_file_name  
+    save_data_csv = f'./data/csv/output{folder_name}/output_{index}.csv'  
+    z = 165
+    ori_length1, ori_length2, ori_length3 = cal_ori_length(f2=f2)
+    param_length_4 = (175 + z) * 2 * 0.001  
+
+    # 创建 TT12WithMiddle 实例并处理数据  
+    tt12 = TT12WithMiddle(xlsx_path, param_length_4=param_length_4, displacement=(0, 0, 0.38))  
+    tt12.fill_all_data(ori_length_1=ori_length1, ori_length_2=ori_length2, ori_length_3=ori_length3)  
+    tt12.export_to_csv(csv_path)  
+
+    # 创建 TT12_MJCF 实例并生成模型  
+    tt12_mjcf = TT12_MJCF()  
+    tt12_mjcf.time_step = 0.00001  
+    tt12_mjcf.generate_tt_model(csv_path, tt_model_name='tt_model_0', pos=(0, 0, 0))  
+    tt12_mjcf.export_to_xml_file(export_xml_file_path, export_xml_file_name)  
+
+    # 创建 TT12_Control 实例并进行仿真  
+    tt12_control = TT12_Control(xml_path, keyframe_id=0)  
+    tt12_control.Hz = 200  
+    tt12_control.is_control = True  
+    tt12_control.simulate(is_render=False, stop_time=1)  
+    tt12_control.recorded_data.save_data(save_data_csv)
+
+def process_initial_velocity(initial_velocity, index, folder_name='0913_initial_velocity'):  
+    xlsx_path = './data/xlsx/topology_TSR_flexible_strut_ball_foot_v1_R.xlsx'
+    csv_path = f'./data/csv/{folder_name}/specific_{index}.csv'  
+    export_xml_file_path = f'./data/xml/{folder_name}/'  
+    export_xml_file_name = f"TT12_0911_{index}.xml"  
+    xml_path = export_xml_file_path + export_xml_file_name  
+    save_data_csv = f'./data/csv/output{folder_name}/output_{index}.csv'  
+
+    z = 165
+    ori_length1, ori_length2, ori_length3 = cal_ori_length()
+    param_length_4 = (175 + z) * 2 * 0.001  
+
+    # 创建 TT12WithMiddle 实例并处理数据  
+    tt12 = TT12WithMiddle(xlsx_path, param_length_4=param_length_4, displacement=(0, 0, 0.38))  
+    tt12.fill_all_data(ori_length_1=ori_length1, ori_length_2=ori_length2, ori_length_3=ori_length3)  
+    tt12.export_to_csv(csv_path)  
+
+    # 创建 TT12_MJCF 实例并生成模型  
+    tt12_mjcf = TT12_MJCF()  
+    tt12_mjcf.time_step = 0.00001  
+    tt12_mjcf.initial_velocity = initial_velocity  
+    tt12_mjcf.generate_tt_model(csv_path, tt_model_name='tt_model_0', pos=(0, 0, 0))  
+    tt12_mjcf.export_to_xml_file(export_xml_file_path, export_xml_file_name)  
+
+    # 创建 TT12_Control 实例并进行仿真  
+    tt12_control = TT12_Control(xml_path, keyframe_id=0)  
+    tt12_control.Hz = 200  
+    tt12_control.is_control = True  
+    tt12_control.simulate(is_render=False, stop_time=1)  
+    tt12_control.recorded_data.save_data(save_data_csv)
+
+def process_floor_torsional_friction(floor_torsional_friction, index, folder_name='0913_floor_torsional_friction'):  
+    xlsx_path = './data/xlsx/topology_TSR_flexible_strut_ball_foot_v1_R.xlsx'
+    csv_path = f'./data/csv/{folder_name}/specific_{index}.csv'  
+    export_xml_file_path = f'./data/xml/{folder_name}/'  
+    export_xml_file_name = f"TT12_0911_{index}.xml"  
+    xml_path = export_xml_file_path + export_xml_file_name  
+    save_data_csv = f'./data/csv/output{folder_name}/output_{index}.csv'  
+
+    z = 165
+    ori_length1, ori_length2, ori_length3 = cal_ori_length()
+    param_length_4 = (175 + z) * 2 * 0.001  
+
+    # 创建 TT12WithMiddle 实例并处理数据  
+    tt12 = TT12WithMiddle(xlsx_path, param_length_4=param_length_4, displacement=(0, 0, 0.38))  
+    tt12.fill_all_data(ori_length_1=ori_length1, ori_length_2=ori_length2, ori_length_3=ori_length3)  
+    tt12.export_to_csv(csv_path)  
+
+    # 创建 TT12_MJCF 实例并生成模型  
+    tt12_mjcf = TT12_MJCF()  
+    tt12_mjcf.time_step = 0.00001  
+    tt12_mjcf.floor_friction = f'0.5 {floor_torsional_friction} 0.0001'  
+    tt12_mjcf.generate_tt_model(csv_path, tt_model_name='tt_model_0', pos=(0, 0, 0))  
+    tt12_mjcf.export_to_xml_file(export_xml_file_path, export_xml_file_name)  
+
+    # 创建 TT12_Control 实例并进行仿真  
+    tt12_control = TT12_Control(xml_path, keyframe_id=0)  
+    tt12_control.Hz = 200  
+    tt12_control.is_control = True  
+    tt12_control.simulate(is_render=False, stop_time=1)  
+    tt12_control.recorded_data.save_data(save_data_csv)
+
+def process_floor_rolling_friction(floor_rolling_friction, index, folder_name='0913_floor_rolling_friction'):  
+    xlsx_path = './data/xlsx/topology_TSR_flexible_strut_ball_foot_v1_R.xlsx'
+    csv_path = f'./data/csv/{folder_name}/specific_{index}.csv'  
+    export_xml_file_path = f'./data/xml/{folder_name}/'  
+    export_xml_file_name = f"TT12_0911_{index}.xml"  
+    xml_path = export_xml_file_path + export_xml_file_name  
+    save_data_csv = f'./data/csv/output{folder_name}/output_{index}.csv'  
+
+    z = 165
+    ori_length1, ori_length2, ori_length3 = cal_ori_length()
+    param_length_4 = (175 + z) * 2 * 0.001  
+
+    # 创建 TT12WithMiddle 实例并处理数据  
+    tt12 = TT12WithMiddle(xlsx_path, param_length_4=param_length_4, displacement=(0, 0, 0.38))  
+    tt12.fill_all_data(ori_length_1=ori_length1, ori_length_2=ori_length2, ori_length_3=ori_length3)  
+    tt12.export_to_csv(csv_path)  
+
+    # 创建 TT12_MJCF 实例并生成模型  
+    tt12_mjcf = TT12_MJCF()  
+    tt12_mjcf.time_step = 0.00001  
+    tt12_mjcf.floor_friction = f'0.5 0.005 {floor_rolling_friction}'  
+    tt12_mjcf.generate_tt_model(csv_path, tt_model_name='tt_model_0', pos=(0, 0, 0))  
+    tt12_mjcf.export_to_xml_file(export_xml_file_path, export_xml_file_name)  
+
+    # 创建 TT12_Control 实例并进行仿真  
+    tt12_control = TT12_Control(xml_path, keyframe_id=0)  
+    tt12_control.Hz = 200  
+    tt12_control.is_control = True  
+    tt12_control.simulate(is_render=False, stop_time=1)  
+    tt12_control.recorded_data.save_data(save_data_csv)
+
+def process_tongue(tongue, index):  
+    xlsx_path = './data/xlsx/topology_TSR_flexible_strut_ball_foot_v1_R.xlsx'
+    csv_path = f'./data/csv/0913_tongue/data_tt12bar_0913_{index}.csv'  
+    export_xml_file_path = './data/xml/0913_tongue/'  
+    export_xml_file_name = f"TT12_0913_{index}.xml"  
+    xml_path = export_xml_file_path + export_xml_file_name  
+    save_data_csv = f'./data/csv/output0913_tongue/output_tt12bar_{index}.csv'  
+    # ori_length1, ori_length2, ori_length3 = cal_ori_length(f2=f2)
+
+    # 创建 TT12WithMiddle 实例并处理数据  
+    tt12 = TT12WithMiddle(xlsx_path, displacement=(0, 0, 0.38))  
+    ori_length_1, ori_length_2, ori_length_3 = cal_ori_length()
+    tt12.fill_all_data(ori_length_1=ori_length_1, ori_length_2=ori_length_2, ori_length_3=ori_length_3)  
+    tt12.export_to_csv(csv_path)  
+
+    # 创建 TT12_MJCF 实例并生成模型  
+    tt12_mjcf = TT12_MJCF()  
+    tt12_mjcf.tongue = tongue
+    tt12_mjcf.time_step = 0.00001  
+    tt12_mjcf.generate_tt_model(csv_path, tt_model_name='tt_model_0', pos=(0, 0, 0))  
+    tt12_mjcf.export_to_xml_file(export_xml_file_path, 
+                                 export_xml_file_name, is_correct_keyframe=True)  
+
+    # 创建 TT12_Control 实例并进行仿真  
+    tt12_control = TT12_Control(xml_path, keyframe_id=0)  
+    tt12_control.Hz = 2000
+    tt12_control.is_control = True  
+    tt12_control.simulate(is_render=False, stop_time=1)  
+    tt12_control.recorded_data.save_data(save_data_csv)
+    # tt12_control.recorded_data.plot_all_data()
+
+def check_and_create_folder(folder_path):  
+    """  
+    检测文件夹是否存在，如果不存在则创建该文件夹。  
+
+    :param folder_path: 要检测和创建的文件夹路径  
+    """  
+    if not os.path.exists(folder_path):  
+        os.makedirs(folder_path)  
+        print(f"文件夹 '{folder_path}' 已创建。")  
+    else:  
+        print(f"文件夹 '{folder_path}' 已存在。")  
+
+def find_max_z_and_parameters(csv_file):  
+    # 读取 CSV 文件  
+    df = pd.read_csv(csv_file)  
+
+    # 假设 'z' 是您要查找的列名  
+    max_z_row = df.loc[df['outside_z_pos_datas'].idxmax()]  # 找到最大 z 值对应的行  
+
+    # 获取最大 z 值及其对应的其他参数  
+    max_z_value = max_z_row['outside_z_pos_datas']  
+    return max_z_row 
+
+def plot_data(csv_file):  
+    # 读取 CSV 文件  
+    df = pd.read_csv(csv_file)  
+
+    # 提取时间列  
+    time = df['Time']  
+
+    # 创建子图，行数为其他参数的数量，列数为 1  
+    num_params = len(df.columns) - 1  # 减去时间列  
+    fig, axs = plt.subplots(num_params, 1, figsize=(12, 4 * num_params), sharex=True)  
+
+    # 遍历其他列（除了时间列）并绘制曲线  
+    for i, column in enumerate(df.columns): 
+        if column != 'Time':  
+            axs[i-1].plot(time, df[column], label=column)  
+            axs[i-1].set_title(column)  
+            axs[i-1].set_ylabel('Values')  
+            axs[i-1].grid()  
+            axs[i-1].legend()  
+
+    # 设置 x 轴标签  
+    axs[-1].set_xlabel('Time (s)')  
+
+    # 调整布局  
+    plt.tight_layout()  
+
+    # 显示图形  
+    plt.show()  
+
+def get_all_experiments_max_height_results(folder_path = 'output0911_f1', num=240):
+    results = []
+    for i in range(num):  
+        save_data_csv = f'./data/csv/{folder_path}/output_{i}.csv'  
+        row = find_max_z_and_parameters(save_data_csv)  
+        # 将找到的行添加到结果 DataFrame 中  
+        results.append(row)  
+
+    results_df = pd.DataFrame(results)  
+
+    results_df.to_csv(f'./data/csv/{folder_path}/max_z_results.csv', index=False)   
+ 
+def plot_time_height_curve(folder_path = 'output0911_f1', num=240):
+    fig, ax = plt.subplots(figsize=(12, 8))  
+    for i in range(num):  
+        save_data_csv = f'./data/csv/{folder_path}/output_{i}.csv' 
+        df = pd.read_csv(save_data_csv)  
+        ax.plot(df['Time'], df['outside_z_pos_datas'], label=f'{i}')
+    ax.set_xlabel('Time (s)')
+    ax.set_ylabel('Outside Z Position (m)')
+    ax.set_title('Outside Z Position vs Time')
+    ax.grid()
+    ax.legend()
+    plt.savefig(f'./data/csv/{folder_path}/fig_time_height_curve.png')
+    # plt.show()
+
+def plot_max_z_results(folder_path = 'output0911_f1', x = np.linspace(20, 200, 240)):
+    fig, ax = plt.subplots(figsize=(12, 8))  
+    max_z_results = pd.read_csv(f'./data/csv/{folder_path}/max_z_results.csv')  
+    ax.plot(x, max_z_results['outside_z_pos_datas'])
+    ax.set_xlabel('x_value')
+    ax.set_ylabel('z')
+    ax.set_title('max height')
+    ax.grid()
+    # ax.legend()
+    plt.savefig(f'./data/csv/{folder_path}/fig_max_z_results.png')
+    # plt.show()
+
+def delete_files_in_specified_folder(folder_path):
+    for file in os.listdir(folder_path):
+        os.remove(os.path.join(folder_path, file))
 
 def main0824():
     """生成最新的模型，查看模型，并做实验验证MuJoCo的准确性
@@ -892,113 +1219,6 @@ def main0827():
             tt12_control.recorded_data.plot_data(attr_name_list=['angvel_inside_ball', 'outside_z_pos', 'torque'])  
             # tt12_control.recorded_data.save_data(filename='./data/csv/data_tt12bar_0824_1.csv')  
 
-def process_z(z, index):  
-    xlsx_path = './data/xlsx/topology_TSR_flexible_strut_ball_foot_v1_R.xlsx'
-    csv_path = f'./data/csv/csv0911/data_tt12bar_0911_{index}.csv'  
-    export_xml_file_path = './data/xml/0911/'  
-    export_xml_file_name = f"TT12_0911_{index}.xml"  
-    xml_path = export_xml_file_path + export_xml_file_name  
-    save_data_csv = f'./data/csv/0911/output_tt12bar_{index}.csv'  
-
-    param_length_4 = (175 + z) * 2 * 0.001  
-
-    # 创建 TT12WithMiddle 实例并处理数据  
-    tt12 = TT12WithMiddle(xlsx_path, param_length_4=param_length_4)  
-    tt12.fill_all_data(ori_length_1=0.22, ori_length_2=0.10, ori_length_3=0.18)  
-    tt12.export_to_csv(csv_path)  
-
-    # 创建 TT12_MJCF 实例并生成模型  
-    tt12_mjcf = TT12_MJCF()  
-    tt12_mjcf.time_step = 0.00001  
-    tt12_mjcf.generate_tt_model(csv_path, tt_model_name='tt_model_0', pos=(0, 0, 0))  
-    tt12_mjcf.export_to_xml_file(export_xml_file_path, export_xml_file_name)  
-
-    # 创建 TT12_Control 实例并进行仿真  
-    tt12_control = TT12_Control(xml_path, keyframe_id=0)  
-    tt12_control.Hz = 200  
-    tt12_control.is_control = True  
-    tt12_control.simulate(is_render=False, stop_time=1)  
-    tt12_control.recorded_data.save_data(save_data_csv)
-
-def cal_ori_length(z=165, f1=100, f2=290):
-    a=350/2
-    z=165
-    f3 = (f2/np.sqrt(2) - f1)*2*np.sqrt(a**2+z**2)/(a-z)
-    stiffness1 = 771  # N/m    
-    stiffness2 = 2000
-    stiffness3 = 67000
-    
-
-    length1 = 0.35
-    length2 = 0.35/2*np.sqrt(2)
-    length3 = 0.35/2*np.sqrt(2)
-
-    dx1 = f1/stiffness1
-    dx2 = f2/stiffness2
-    dx3 = f3/stiffness3
-    ori_length1 = abs(dx1-length1)
-    ori_length2 = abs(dx2-length2)
-    ori_length3 = abs(dx3-length3)
-    return ori_length1, ori_length2, ori_length3
-
-def process_f1(f1, index):  
-    xlsx_path = './data/xlsx/topology_TSR_flexible_strut_ball_foot_v1_R.xlsx'
-    csv_path = f'./data/csv/0911_f1/data_tt12bar_0911_{index}.csv'  
-    export_xml_file_path = './data/xml/0911_f1/'  
-    export_xml_file_name = f"TT12_0911_{index}.xml"  
-    xml_path = export_xml_file_path + export_xml_file_name  
-    save_data_csv = f'./data/csv/output0911_f1/output_tt12bar_{index}.csv'  
-    z = 165
-    ori_length1, ori_length2, ori_length3 = cal_ori_length(z=165, f1=f1, f2=290)
-    param_length_4 = (175 + z) * 2 * 0.001  
-
-    # 创建 TT12WithMiddle 实例并处理数据  
-    tt12 = TT12WithMiddle(xlsx_path, param_length_4=param_length_4)  
-    tt12.fill_all_data(ori_length_1=ori_length1, ori_length_2=ori_length2, ori_length_3=ori_length3)  
-    tt12.export_to_csv(csv_path)  
-
-    # 创建 TT12_MJCF 实例并生成模型  
-    tt12_mjcf = TT12_MJCF()  
-    tt12_mjcf.time_step = 0.00001  
-    tt12_mjcf.generate_tt_model(csv_path, tt_model_name='tt_model_0', pos=(0, 0, 0))  
-    tt12_mjcf.export_to_xml_file(export_xml_file_path, export_xml_file_name)  
-
-    # 创建 TT12_Control 实例并进行仿真  
-    tt12_control = TT12_Control(xml_path, keyframe_id=0)  
-    tt12_control.Hz = 200  
-    tt12_control.is_control = True  
-    tt12_control.simulate(is_render=False, stop_time=1)  
-    tt12_control.recorded_data.save_data(save_data_csv)
-
-def process_f2(f2, index):  
-    xlsx_path = './data/xlsx/topology_TSR_flexible_strut_ball_foot_v1_R.xlsx'
-    csv_path = f'./data/csv/0911_f2/data_tt12bar_0911_{index}.csv'  
-    export_xml_file_path = './data/xml/0911_f2/'  
-    export_xml_file_name = f"TT12_0911_{index}.xml"  
-    xml_path = export_xml_file_path + export_xml_file_name  
-    save_data_csv = f'./data/csv/output0911_f2/output_tt12bar_{index}.csv'  
-    z = 165
-    ori_length1, ori_length2, ori_length3 = cal_ori_length(f2=f2)
-    param_length_4 = (175 + z) * 2 * 0.001  
-
-    # 创建 TT12WithMiddle 实例并处理数据  
-    tt12 = TT12WithMiddle(xlsx_path, param_length_4=param_length_4)  
-    tt12.fill_all_data(ori_length_1=ori_length1, ori_length_2=ori_length2, ori_length_3=ori_length3)  
-    tt12.export_to_csv(csv_path)  
-
-    # 创建 TT12_MJCF 实例并生成模型  
-    tt12_mjcf = TT12_MJCF()  
-    tt12_mjcf.time_step = 0.00001  
-    tt12_mjcf.generate_tt_model(csv_path, tt_model_name='tt_model_0', pos=(0, 0, 0))  
-    tt12_mjcf.export_to_xml_file(export_xml_file_path, export_xml_file_name)  
-
-    # 创建 TT12_Control 实例并进行仿真  
-    tt12_control = TT12_Control(xml_path, keyframe_id=0)  
-    tt12_control.Hz = 200  
-    tt12_control.is_control = True  
-    tt12_control.simulate(is_render=False, stop_time=1)  
-    tt12_control.recorded_data.save_data(save_data_csv)
-
 def main0911():
     z_list = np.linspace(0, 165, 240)
     total_tasks = len(z_list)  
@@ -1007,85 +1227,6 @@ def main0911():
         pool.starmap(process_z, [(z, i) for i, z in enumerate(z_list)])  
     end_time = time.time()  
     print(f"Total time: {end_time - start_time:.2f}s")  
-
-def find_max_z_and_parameters(csv_file):  
-    # 读取 CSV 文件  
-    df = pd.read_csv(csv_file)  
-
-    # 假设 'z' 是您要查找的列名  
-    max_z_row = df.loc[df['outside_z_pos_datas'].idxmax()]  # 找到最大 z 值对应的行  
-
-    # 获取最大 z 值及其对应的其他参数  
-    max_z_value = max_z_row['outside_z_pos_datas']  
-    return max_z_row 
-
-def plot_data(csv_file):  
-    # 读取 CSV 文件  
-    df = pd.read_csv(csv_file)  
-
-    # 提取时间列  
-    time = df['Time']  
-
-    # 创建子图，行数为其他参数的数量，列数为 1  
-    num_params = len(df.columns) - 1  # 减去时间列  
-    fig, axs = plt.subplots(num_params, 1, figsize=(12, 4 * num_params), sharex=True)  
-
-    # 遍历其他列（除了时间列）并绘制曲线  
-    for i, column in enumerate(df.columns): 
-        if column != 'Time':  
-            axs[i-1].plot(time, df[column], label=column)  
-            axs[i-1].set_title(column)  
-            axs[i-1].set_ylabel('Values')  
-            axs[i-1].grid()  
-            axs[i-1].legend()  
-
-    # 设置 x 轴标签  
-    axs[-1].set_xlabel('Time (s)')  
-
-    # 调整布局  
-    plt.tight_layout()  
-
-    # 显示图形  
-    plt.show()  
-
-def get_all_experiments_max_height_results(folder_path = 'output0911_f1'):
-    results = []
-    for i in range(240):  
-        save_data_csv = f'./data/csv/{folder_path}/output_tt12bar_{i}.csv'  
-        row = find_max_z_and_parameters(save_data_csv)  
-        # 将找到的行添加到结果 DataFrame 中  
-        results.append(row)  
-
-    results_df = pd.DataFrame(results)  
-
-    results_df.to_csv(f'./data/csv/{folder_path}/max_z_results.csv', index=False)   
- 
-def plot_time_height_curve(folder_path = 'output0911_f1'):
-    fig, ax = plt.subplots(figsize=(12, 8))  
-    for i in range(240):  
-        save_data_csv = f'./data/csv/{folder_path}/output_tt12bar_{i}.csv' 
-        df = pd.read_csv(save_data_csv)  
-        ax.plot(df['Time'], df['outside_z_pos_datas'], label=f'{i}')
-    ax.set_xlabel('Time (s)')
-    ax.set_ylabel('Outside Z Position (m)')
-    ax.set_title('Outside Z Position vs Time')
-    ax.grid()
-    ax.legend()
-    plt.show()
-
-def plot_max_z_results(folder_path = 'output0911_f1', x = np.linspace(20, 200, 240)):
-    fig, ax = plt.subplots(figsize=(12, 8))  
-    max_z_results = pd.read_csv(f'./data/csv/{folder_path}/max_z_results.csv')  
-    ax.plot(x, max_z_results['outside_z_pos_datas'])
-    ax.set_xlabel('x_value')
-    ax.set_ylabel('z')
-    ax.set_title('max height')
-    ax.grid()
-    plt.show()
-
-def delete_files_in_specified_folder(folder_path):
-    for file in os.listdir(folder_path):
-        os.remove(os.path.join(folder_path, file))
 
 def main0911_2():
     f1_list = np.linspace(20, 200, 240)
@@ -1103,10 +1244,66 @@ def main0911_3():
     end_time = time.time()  
     print(f"Total time: {end_time - start_time:.2f}s")  
 
+def main0913_1():
+    check_and_create_folder('./data/csv/output0913_tongue')
+    check_and_create_folder('./data/csv/0913_tongue')
+    check_and_create_folder('./data/xml/0913_tongue')
+    num = 240
+    tongue_list = np.linspace(-200, -10, num)
+    start_time = time.time()  
+    with multiprocessing.Pool(processes=12) as pool:  
+        pool.starmap(process_tongue, [(tongue, i) for i, tongue in enumerate(tongue_list)])  
+    end_time = time.time()
+    print(f"Total time: {end_time - start_time:.2f}s")  
+    get_all_experiments_max_height_results(folder_path='output0913_tongue', num=num)
+    plot_time_height_curve(folder_path='output0913_tongue', num=num)
+    plot_max_z_results(folder_path='output0913_tongue', x=tongue_list)
+    delete_files_in_specified_folder('./data/csv/0913_tongue')
+    delete_files_in_specified_folder('./data/xml/0913_tongue')
+
+def main0913_all():
+    # 将所有实验一次性进行完
+    # 改变z、f1、f2、initial_velocity、floor_torsional_friction、floor_rolling _friction
+    z_list = np.linspace(0, 165, 240)
+    f1_list = np.linspace(20, 200, 240)
+    f2_list = np.linspace(150, 400, 240)
+    initial_velocity_list = np.linspace(10, 1000, 240)
+    floor_torsional_friction_list = np.linspace(0.0001, 0.9, 240)
+    floor_rolling_friction_list = np.linspace(0.0001, 0.9, 240)
+
+    all_list = [z_list, f1_list, f2_list, initial_velocity_list, floor_torsional_friction_list, floor_rolling_friction_list]
+    folder_name_list = ['0913_z', '0913_f1', '0913_f2', '0913_initial_velocity', '0913_floor_torsional_friction', '0913_floor_rolling_friction']
+    function_list = [process_z, process_f1, process_f2, process_initial_velocity, process_floor_torsional_friction, process_floor_rolling_friction]
+    
+    for i, folder_name in enumerate(folder_name_list):
+        check_and_create_folder(f'./data/csv/output{folder_name}')
+        check_and_create_folder(f'./data/csv/{folder_name}')
+        check_and_create_folder(f'./data/xml/{folder_name}')
+
+        start_time = time.time()  
+        with multiprocessing.Pool(processes=12) as pool:  
+            pool.starmap(function_list[i], [(value, j, folder_name_list[i]) for j, value in enumerate(all_list[i])])  
+        end_time = time.time()
+
+        print(f"Total time: {end_time - start_time:.2f}s")  
+
+        get_all_experiments_max_height_results(folder_path=f'output{folder_name}')
+        plot_time_height_curve(folder_path=f'output{folder_name}')
+        plot_max_z_results(folder_path=f'output{folder_name}', x=all_list[i])
+
+        delete_files_in_specified_folder(f'./data/csv/{folder_name}')
+        delete_files_in_specified_folder(f'./data/xml/{folder_name}')
+
+
+
 if __name__ == "__main__":
     # main0911()
     # main0911_2()
     # main0911_3()
-    # get_all_experiments_max_height_results(folder_path='output0911_f2')
-    # plot_time_height_curve(folder_path='output0911_f2')
-    plot_max_z_results(folder_path='output0911_f2', x=np.linspace(150, 400, 240))
+    # main0913_1()    # 力矩
+    # main0913_all()
+    folder_name = '0913_z'
+    z_list = np.linspace(0, 165, 240)
+    get_all_experiments_max_height_results(folder_path=f'output{folder_name}')
+    plot_time_height_curve(folder_path=f'output{folder_name}')
+    plot_max_z_results(folder_path=f'output{folder_name}', x=z_list)
