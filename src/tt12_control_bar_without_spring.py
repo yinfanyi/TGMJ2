@@ -542,6 +542,7 @@ class record_data():
         self.outside_v_x_datas = []
 
         self.outside_x_pos_datas = []
+        self.outside_y_pos_datas = []
         self.outside_z_pos_datas = []
         self.intside_x_pos_datas = []
 
@@ -660,12 +661,15 @@ class record_data():
         df.to_csv(filename, index=False)  
 
 class TT12_Control():
-    def __init__(self, mjcf_file_name:str, keyframe_id=None) -> None:
+    def __init__(self, mjcf_file_name=None, keyframe_id=None, xml_string=None) -> None:
         self.mjcf_file_name = mjcf_file_name
         # self.physics = dmmj.Physics.from_xml_path(self.mjcf_file_name)
 
         self.Hz = 20
-        self.model = mj.MjModel.from_xml_path(self.mjcf_file_name)  # MuJoCo model
+        if xml_string is None:
+            self.model = mj.MjModel.from_xml_path(self.mjcf_file_name)  # MuJoCo model
+        else:
+            self.model = mj.MjModel.from_xml_string(xml_string)  # MuJoCo model
         self.data = mj.MjData(self.model)                # MuJoCo data
         self.keyframe_id = keyframe_id
         self.recorded_data = record_data()
@@ -702,13 +706,14 @@ class TT12_Control():
             self.data.ctrl[torque_x_actuator_id] = 0
             self.set_velocity_servo("tt_model_0/velocity_x_ctrl", 100)
             self.data.ctrl[velocity_x_actuator_id] = 0
+            return False
             # self.data.xfrc_applied[13, :] = [0,0,0,0,0,0]
             # print('time: ', self.data.time)
         # else:
         #     self.set_velocity_servo("tt_model_0/velocity_x_ctrl", 0)
         # if self.data.time > 0.6:
             # self.data.xfrc_applied[13, :] = [0,0,0,0,0,0]
-        return
+        return True
         if self.data.time < 0.045:
             self.data.xfrc_applied[13, :] = [0,0,0,100,0,0]
         else:
@@ -724,7 +729,7 @@ class TT12_Control():
         current_simstart = self.data.time   # 当前一帧的开始时间
         while (self.data.time - current_simstart < 1.0/self.Hz):
             if self.is_control:
-                self.controller()
+                self.is_control = self.controller()
             mj.mj_step(self.model, self.data)
 
     def simulate(self, is_render=True, stop_time=10):
@@ -782,9 +787,10 @@ class TT12_Control():
             while self.data.time < stop_time:
                 self.recorded_data.bind_data(time=self.data.time,
                                                 # 位置                     
-                                                outside_x_pos=self.data.sensor('tt_model_0/pos_outside_ball').data[0],
+                                                # outside_x_pos=self.data.sensor('tt_model_0/pos_outside_ball').data[0],
+                                                outside_y_pos=self.data.sensor('tt_model_0/pos_outside_ball').data[1],
                                                 outside_z_pos=self.data.sensor('tt_model_0/pos_outside_ball').data[2],
-                                                intside_x_pos=self.data.sensor('tt_model_0/pos_inside_ball').data[0],
+                                                # intside_x_pos=self.data.sensor('tt_model_0/pos_inside_ball').data[0],
                                                 # 速度
                                                 angvel_inside_ball = self.data.sensor('tt_model_0/angvel_inside_ball').data[0],
                                                 angvel_outside_ball = self.data.sensor('tt_model_0/angvel_outside_ball').data[0],
@@ -1294,16 +1300,11 @@ def main0913_all():
         delete_files_in_specified_folder(f'./data/csv/{folder_name}')
         delete_files_in_specified_folder(f'./data/xml/{folder_name}')
 
-
-
 if __name__ == "__main__":
     # main0911()
     # main0911_2()
     # main0911_3()
     # main0913_1()    # 力矩
     # main0913_all()
-    folder_name = '0913_z'
-    z_list = np.linspace(0, 165, 240)
-    get_all_experiments_max_height_results(folder_path=f'output{folder_name}')
-    plot_time_height_curve(folder_path=f'output{folder_name}')
-    plot_max_z_results(folder_path=f'output{folder_name}', x=z_list)
+    pass
+
