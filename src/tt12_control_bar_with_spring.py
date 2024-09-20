@@ -247,11 +247,11 @@ class TT12_MJCF():
             new_geom_to = new_body.add('geom', name=f'geom_to', type='cylinder', fromto=tobar_fromto_coords_local_str, mass=str(mass/2), size='0.012', rgba='0.2 0.2 0.2 0.6')
             self._bar_index += 1
             if self._bar_index <= 4:
-                new_body.add('joint', type='slide', name='slide_to', axis="0 0 1", limited='true', range='-10 10')
+                new_body.add('joint', type='slide', name='slide_to', axis="0 0 1", limited='true', range='-0.5 0.5')
             elif self._bar_index <= 8:
-                new_body.add('joint', type='slide', name='slide_to', axis="0 1 0", limited='true', range='-10 10')
+                new_body.add('joint', type='slide', name='slide_to', axis="0 1 0", limited='true', range='-0.5 0.5')
             else:
-                new_body.add('joint', type='slide', name='slide_to', axis="1 0 0", limited='true', range='-10 10')
+                new_body.add('joint', type='slide', name='slide_to', axis="1 0 0", limited='true', range='-0.5 0.5')
             
             new_model.worldbody.add('site', name=from_node_label, pos=from_point_coords_local_str)
             new_body.add('site', name=to_node_label, pos=to_point_coords_local_str)
@@ -260,7 +260,7 @@ class TT12_MJCF():
             # new_model.worldbody.add('site', name=f's_from_bar_string', pos=bar_string_from_coord_local_str)
             # new_body.add('site', name=f's_to_bar_string', pos=bar_string_to_coord_local_str)
             spatial = tt_model.tendon.add('spatial', name=f'spatial_bar_string_{x_str}_{y_str}', stiffness=self.bar_spring_stiffness,
-                                       springlength=length_bar_spring + 0.7, rgba='1 1 1 1', width='0.002')
+                                       springlength=length_bar_spring + 0.7, rgba='1 1 1 1', width='0.002', damping='100')
             spatial.add('site', site=f'rod{x_str}_{y_str}/{from_node_label}')
             spatial.add('site', site=f'rod{x_str}_{y_str}/{to_node_label}')
 
@@ -794,7 +794,7 @@ class TT12_Control():
                     #     while keyboard.is_pressed('a'):  
                     #         pass
                     # Only step the simulation if not paused  
-                    if not is_paused:  
+                    if not is_paused:
                         self.recorded_data.bind_data(time=self.data.time,
                                                 # 位置                     
                                                 outside_x_pos=self.data.sensor('tt_model_0/pos_outside_ball').data[0],
@@ -1268,7 +1268,7 @@ if __name__ == "__main__":
     save_data_csv = f'./data/csv/output{folder_name}/output_{index}.csv'
 
     # z = 165
-    z = 150
+    z = 165
     ori_length1, ori_length2, ori_length3 = cal_ori_length(z=z)
     param_length_4 = (175 + z) * 2 * 0.001  
 
@@ -1301,3 +1301,4 @@ if __name__ == "__main__":
     tt12_control.is_control = True  
     tt12_control.simulate(is_render=True, stop_time=10)
     tt12_control.recorded_data.save_data(save_data_csv)
+    tt12_control.recorded_data.plot_all_data()

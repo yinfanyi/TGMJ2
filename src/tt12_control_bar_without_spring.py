@@ -1267,6 +1267,29 @@ def main0913_1():
     delete_files_in_specified_folder('./data/csv/0913_tongue')
     delete_files_in_specified_folder('./data/xml/0913_tongue')
 
+def single_tongue_experiment(tongue, index):
+    xlsx_path = './data/xlsx/topology_TSR_flexible_strut_ball_foot_v1_R.xlsx'
+    csv_path = f'./data/csv/0913_tongue/data_tt12bar_0913_{index}.csv'  
+    export_xml_file_path = './data/xml/0913_tongue/'  
+    export_xml_file_name = f"TT12_0913_{index}.xml"  
+    xml_path = export_xml_file_path + export_xml_file_name  
+    save_data_csv = f'./data/csv/output0913_tongue/output_tt12bar_{index}.csv'  
+    # ori_length1, ori_length2, ori_length3 = cal_ori_length(f2=f2)
+
+    # 创建 TT12WithMiddle 实例并处理数据  
+    tt12 = TT12WithMiddle(xlsx_path, displacement=(0, 0, 0.38))  
+    ori_length_1, ori_length_2, ori_length_3 = cal_ori_length()
+    tt12.fill_all_data(ori_length_1=ori_length_1, ori_length_2=ori_length_2, ori_length_3=ori_length_3)  
+    tt12.export_to_csv(csv_path)  
+
+    # 创建 TT12_MJCF 实例并生成模型  
+    tt12_mjcf = TT12_MJCF()  
+    tt12_mjcf.tongue = tongue
+    tt12_mjcf.time_step = 0.00001  
+    tt12_mjcf.generate_tt_model(csv_path, tt_model_name='tt_model_0', pos=(0, 0, 0))  
+    tt12_mjcf.export_to_xml_file(export_xml_file_path, 
+                                 export_xml_file_name, is_correct_keyframe=True)  
+
 def main0913_all():
     # 将所有实验一次性进行完
     # 改变z、f1、f2、initial_velocity、floor_torsional_friction、floor_rolling _friction
@@ -1306,5 +1329,5 @@ if __name__ == "__main__":
     # main0911_3()
     # main0913_1()    # 力矩
     # main0913_all()
-    pass
+    single_experiment()
 

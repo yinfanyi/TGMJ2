@@ -11,6 +11,8 @@ data/csv/output*
 # data/xlsx/
 # data/videos/
 # data/png/
+tests/launch
+tests/09*
 
 
 other/

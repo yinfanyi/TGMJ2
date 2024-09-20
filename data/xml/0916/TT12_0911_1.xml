@@ -47,7 +47,7 @@
       <geom name="tt_model_0/rod0_1/geom_from" class="tt_model_0/rod0_1/" type="cylinder" size="0.012" rgba="0.20000000000000001 0.20000000000000001 0.20000000000000001 0.59999999999999998" mass="0.01125" fromto="0 0 0.34999999999999998 0 0 0" />
       <body name="tt_model_0/rod0_1/body_to" pos="0 0 0">
         <geom name="tt_model_0/rod0_1/geom_to" class="tt_model_0/rod0_1/" type="cylinder" size="0.012" rgba="0.20000000000000001 0.20000000000000001 0.20000000000000001 0.59999999999999998" mass="0.01125" fromto="0 0 0 0 0 -0.34999999999999998" />
-        <joint name="tt_model_0/rod0_1/slide_to" class="tt_model_0/rod0_1/" type="slide" axis="0 0 1" limited="true" range="-10 10" />
+        <joint name="tt_model_0/rod0_1/slide_to" class="tt_model_0/rod0_1/" type="slide" axis="0 0 1" limited="true" range="-0.5 0.5" />
         <site name="tt_model_0/rod0_1/node_1" class="tt_model_0/rod0_1/" pos="0 0 -0.34999999999999998" />
         <geom name="tt_model_0/rod0_1/geom_edge_1" class="tt_model_0/rod0_1/" type="sphere" condim="6" size="0.029999999999999999" rgba="0 0.90000000000000002 0 0.5" mass="0.011299999999999999" pos="0 0 -0.34999999999999998" />
       </body>
@@ -61,7 +61,7 @@
       <geom name="tt_model_0/rod2_3/geom_from" class="tt_model_0/rod2_3/" type="cylinder" size="0.012" rgba="0.20000000000000001 0.20000000000000001 0.20000000000000001 0.59999999999999998" mass="0.01125" fromto="0 0 0.34999999999999998 0 0 0" />
       <body name="tt_model_0/rod2_3/body_to" pos="0 0 0">
         <geom name="tt_model_0/rod2_3/geom_to" class="tt_model_0/rod2_3/" type="cylinder" size="0.012" rgba="0.20000000000000001 0.20000000000000001 0.20000000000000001 0.59999999999999998" mass="0.01125" fromto="0 0 0 0 0 -0.34999999999999998" />
-        <joint name="tt_model_0/rod2_3/slide_to" class="tt_model_0/rod2_3/" type="slide" axis="0 0 1" limited="true" range="-10 10" />
+        <joint name="tt_model_0/rod2_3/slide_to" class="tt_model_0/rod2_3/" type="slide" axis="0 0 1" limited="true" range="-0.5 0.5" />
         <site name="tt_model_0/rod2_3/node_3" class="tt_model_0/rod2_3/" pos="0 0 -0.34999999999999998" />
         <geom name="tt_model_0/rod2_3/geom_edge_3" class="tt_model_0/rod2_3/" type="sphere" condim="6" size="0.029999999999999999" rgba="0 0.90000000000000002 0 0.5" mass="0.011299999999999999" pos="0 0 -0.34999999999999998" />
       </body>
@@ -75,7 +75,7 @@
       <geom name="tt_model_0/rod4_5/geom_from" class="tt_model_0/rod4_5/" type="cylinder" size="0.012" rgba="0.20000000000000001 0.20000000000000001 0.20000000000000001 0.59999999999999998" mass="0.01125" fromto="0 0 0.34999999999999998 0 0 0" />
       <body name="tt_model_0/rod4_5/body_to" pos="0 0 0">
         <geom name="tt_model_0/rod4_5/geom_to" class="tt_model_0/rod4_5/" type="cylinder" size="0.012" rgba="0.20000000000000001 0.20000000000000001 0.20000000000000001 0.59999999999999998" mass="0.01125" fromto="0 0 0 0 0 -0.34999999999999998" />
-        <joint name="tt_model_0/rod4_5/slide_to" class="tt_model_0/rod4_5/" type="slide" axis="0 0 1" limited="true" range="-10 10" />
+        <joint name="tt_model_0/rod4_5/slide_to" class="tt_model_0/rod4_5/" type="slide" axis="0 0 1" limited="true" range="-0.5 0.5" />
         <site name="tt_model_0/rod4_5/node_5" class="tt_model_0/rod4_5/" pos="0 0 -0.34999999999999998" />
         <geom name="tt_model_0/rod4_5/geom_edge_5" class="tt_model_0/rod4_5/" type="sphere" condim="6" size="0.029999999999999999" rgba="0 0.90000000000000002 0 0.5" mass="0.011299999999999999" pos="0 0 -0.34999999999999998" />
       </body>
@@ -89,7 +89,7 @@
       <geom name="tt_model_0/rod6_7/geom_from" class="tt_model_0/rod6_7/" type="cylinder" size="0.012" rgba="0.20000000000000001 0.20000000000000001 0.20000000000000001 0.59999999999999998" mass="0.01125" fromto="0 0 0.34999999999999998 0 0 0" />
       <body name="tt_model_0/rod6_7/body_to" pos="0 0 0">
         <geom name="tt_model_0/rod6_7/geom_to" class="tt_model_0/rod6_7/" type="cylinder" size="0.012" rgba="0.20000000000000001 0.20000000000000001 0.20000000000000001 0.59999999999999998" mass="0.01125" fromto="0 0 0 0 0 -0.34999999999999998" />
-        <joint name="tt_model_0/rod6_7/slide_to" class="tt_model_0/rod6_7/" type="slide" axis="0 0 1" limited="true" range="-10 10" />
+        <joint name="tt_model_0/rod6_7/slide_to" class="tt_model_0/rod6_7/" type="slide" axis="0 0 1" limited="true" range="-0.5 0.5" />
         <site name="tt_model_0/rod6_7/node_7" class="tt_model_0/rod6_7/" pos="0 0 -0.34999999999999998" />
         <geom name="tt_model_0/rod6_7/geom_edge_7" class="tt_model_0/rod6_7/" type="sphere" condim="6" size="0.029999999999999999" rgba="0 0.90000000000000002 0 0.5" mass="0.011299999999999999" pos="0 0 -0.34999999999999998" />
       </body>
@@ -103,7 +103,7 @@
       <geom name="tt_model_0/rod8_9/geom_from" class="tt_model_0/rod8_9/" type="cylinder" size="0.012" rgba="0.20000000000000001 0.20000000000000001 0.20000000000000001 0.59999999999999998" mass="0.01125" fromto="0 0.34999999999999998 0 0 0 0" />
       <body name="tt_model_0/rod8_9/body_to" pos="0 0 0">
         <geom name="tt_model_0/rod8_9/geom_to" class="tt_model_0/rod8_9/" type="cylinder" size="0.012" rgba="0.20000000000000001 0.20000000000000001 0.20000000000000001 0.59999999999999998" mass="0.01125" fromto="0 0 0 0 -0.34999999999999998 0" />
-        <joint name="tt_model_0/rod8_9/slide_to" class="tt_model_0/rod8_9/" type="slide" axis="0 1 0" limited="true" range="-10 10" />
+        <joint name="tt_model_0/rod8_9/slide_to" class="tt_model_0/rod8_9/" type="slide" axis="0 1 0" limited="true" range="-0.5 0.5" />
         <site name="tt_model_0/rod8_9/node_9" class="tt_model_0/rod8_9/" pos="0 -0.34999999999999998 0" />
         <geom name="tt_model_0/rod8_9/geom_edge_9" class="tt_model_0/rod8_9/" type="sphere" condim="6" size="0.029999999999999999" rgba="0 0.90000000000000002 0 0.5" mass="0.011299999999999999" pos="0 -0.34999999999999998 0" />
       </body>
@@ -117,7 +117,7 @@
       <geom name="tt_model_0/rod10_11/geom_from" class="tt_model_0/rod10_11/" type="cylinder" size="0.012" rgba="0.20000000000000001 0.20000000000000001 0.20000000000000001 0.59999999999999998" mass="0.01125" fromto="0 0.34999999999999998 0 0 0 0" />
       <body name="tt_model_0/rod10_11/body_to" pos="0 0 0">
         <geom name="tt_model_0/rod10_11/geom_to" class="tt_model_0/rod10_11/" type="cylinder" size="0.012" rgba="0.20000000000000001 0.20000000000000001 0.20000000000000001 0.59999999999999998" mass="0.01125" fromto="0 0 0 0 -0.34999999999999998 0" />
-        <joint name="tt_model_0/rod10_11/slide_to" class="tt_model_0/rod10_11/" type="slide" axis="0 1 0" limited="true" range="-10 10" />
+        <joint name="tt_model_0/rod10_11/slide_to" class="tt_model_0/rod10_11/" type="slide" axis="0 1 0" limited="true" range="-0.5 0.5" />
         <site name="tt_model_0/rod10_11/node_11" class="tt_model_0/rod10_11/" pos="0 -0.34999999999999998 0" />
         <geom name="tt_model_0/rod10_11/geom_edge_11" class="tt_model_0/rod10_11/" type="sphere" condim="6" size="0.029999999999999999" rgba="0 0.90000000000000002 0 0.5" mass="0.011299999999999999" pos="0 -0.34999999999999998 0" />
       </body>
@@ -131,7 +131,7 @@
       <geom name="tt_model_0/rod12_13/geom_from" class="tt_model_0/rod12_13/" type="cylinder" size="0.012" rgba="0.20000000000000001 0.20000000000000001 0.20000000000000001 0.59999999999999998" mass="0.01125" fromto="0 0.34999999999999998 0 0 0 0" />
       <body name="tt_model_0/rod12_13/body_to" pos="0 0 0">
         <geom name="tt_model_0/rod12_13/geom_to" class="tt_model_0/rod12_13/" type="cylinder" size="0.012" rgba="0.20000000000000001 0.20000000000000001 0.20000000000000001 0.59999999999999998" mass="0.01125" fromto="0 0 0 0 -0.34999999999999998 0" />
-        <joint name="tt_model_0/rod12_13/slide_to" class="tt_model_0/rod12_13/" type="slide" axis="0 1 0" limited="true" range="-10 10" />
+        <joint name="tt_model_0/rod12_13/slide_to" class="tt_model_0/rod12_13/" type="slide" axis="0 1 0" limited="true" range="-0.5 0.5" />
         <site name="tt_model_0/rod12_13/node_13" class="tt_model_0/rod12_13/" pos="0 -0.34999999999999998 0" />
         <geom name="tt_model_0/rod12_13/geom_edge_13" class="tt_model_0/rod12_13/" type="sphere" condim="6" size="0.029999999999999999" rgba="0 0.90000000000000002 0 0.5" mass="0.011299999999999999" pos="0 -0.34999999999999998 0" />
       </body>
@@ -145,7 +145,7 @@
       <geom name="tt_model_0/rod14_15/geom_from" class="tt_model_0/rod14_15/" type="cylinder" size="0.012" rgba="0.20000000000000001 0.20000000000000001 0.20000000000000001 0.59999999999999998" mass="0.01125" fromto="0 0.34999999999999998 0 0 0 0" />
       <body name="tt_model_0/rod14_15/body_to" pos="0 0 0">
         <geom name="tt_model_0/rod14_15/geom_to" class="tt_model_0/rod14_15/" type="cylinder" size="0.012" rgba="0.20000000000000001 0.20000000000000001 0.20000000000000001 0.59999999999999998" mass="0.01125" fromto="0 0 0 0 -0.34999999999999998 0" />
-        <joint name="tt_model_0/rod14_15/slide_to" class="tt_model_0/rod14_15/" type="slide" axis="0 1 0" limited="true" range="-10 10" />
+        <joint name="tt_model_0/rod14_15/slide_to" class="tt_model_0/rod14_15/" type="slide" axis="0 1 0" limited="true" range="-0.5 0.5" />
         <site name="tt_model_0/rod14_15/node_15" class="tt_model_0/rod14_15/" pos="0 -0.34999999999999998 0" />
         <geom name="tt_model_0/rod14_15/geom_edge_15" class="tt_model_0/rod14_15/" type="sphere" condim="6" size="0.029999999999999999" rgba="0 0.90000000000000002 0 0.5" mass="0.011299999999999999" pos="0 -0.34999999999999998 0" />
       </body>
@@ -159,7 +159,7 @@
       <geom name="tt_model_0/rod16_17/geom_from" class="tt_model_0/rod16_17/" type="cylinder" size="0.012" rgba="0.20000000000000001 0.20000000000000001 0.20000000000000001 0.59999999999999998" mass="0.01125" fromto="0.34999999999999998 0 0 0 0 0" />
       <body name="tt_model_0/rod16_17/body_to" pos="0 0 0">
         <geom name="tt_model_0/rod16_17/geom_to" class="tt_model_0/rod16_17/" type="cylinder" size="0.012" rgba="0.20000000000000001 0.20000000000000001 0.20000000000000001 0.59999999999999998" mass="0.01125" fromto="0 0 0 -0.34999999999999998 0 0" />
-        <joint name="tt_model_0/rod16_17/slide_to" class="tt_model_0/rod16_17/" type="slide" axis="1 0 0" limited="true" range="-10 10" />
+        <joint name="tt_model_0/rod16_17/slide_to" class="tt_model_0/rod16_17/" type="slide" axis="1 0 0" limited="true" range="-0.5 0.5" />
         <site name="tt_model_0/rod16_17/node_17" class="tt_model_0/rod16_17/" pos="-0.34999999999999998 0 0" />
         <geom name="tt_model_0/rod16_17/geom_edge_17" class="tt_model_0/rod16_17/" type="sphere" condim="6" size="0.029999999999999999" rgba="0 0.90000000000000002 0 0.5" mass="0.011299999999999999" pos="-0.34999999999999998 0 0" />
       </body>
@@ -173,7 +173,7 @@
       <geom name="tt_model_0/rod18_19/geom_from" class="tt_model_0/rod18_19/" type="cylinder" size="0.012" rgba="0.20000000000000001 0.20000000000000001 0.20000000000000001 0.59999999999999998" mass="0.01125" fromto="0.34999999999999998 0 0 0 0 0" />
       <body name="tt_model_0/rod18_19/body_to" pos="0 0 0">
         <geom name="tt_model_0/rod18_19/geom_to" class="tt_model_0/rod18_19/" type="cylinder" size="0.012" rgba="0.20000000000000001 0.20000000000000001 0.20000000000000001 0.59999999999999998" mass="0.01125" fromto="0 0 0 -0.34999999999999998 0 0" />
-        <joint name="tt_model_0/rod18_19/slide_to" class="tt_model_0/rod18_19/" type="slide" axis="1 0 0" limited="true" range="-10 10" />
+        <joint name="tt_model_0/rod18_19/slide_to" class="tt_model_0/rod18_19/" type="slide" axis="1 0 0" limited="true" range="-0.5 0.5" />
         <site name="tt_model_0/rod18_19/node_19" class="tt_model_0/rod18_19/" pos="-0.34999999999999998 0 0" />
         <geom name="tt_model_0/rod18_19/geom_edge_19" class="tt_model_0/rod18_19/" type="sphere" condim="6" size="0.029999999999999999" rgba="0 0.90000000000000002 0 0.5" mass="0.011299999999999999" pos="-0.34999999999999998 0 0" />
       </body>
@@ -187,7 +187,7 @@
       <geom name="tt_model_0/rod20_21/geom_from" class="tt_model_0/rod20_21/" type="cylinder" size="0.012" rgba="0.20000000000000001 0.20000000000000001 0.20000000000000001 0.59999999999999998" mass="0.01125" fromto="0.34999999999999998 0 0 0 0 0" />
       <body name="tt_model_0/rod20_21/body_to" pos="0 0 0">
         <geom name="tt_model_0/rod20_21/geom_to" class="tt_model_0/rod20_21/" type="cylinder" size="0.012" rgba="0.20000000000000001 0.20000000000000001 0.20000000000000001 0.59999999999999998" mass="0.01125" fromto="0 0 0 -0.34999999999999998 0 0" />
-        <joint name="tt_model_0/rod20_21/slide_to" class="tt_model_0/rod20_21/" type="slide" axis="1 0 0" limited="true" range="-10 10" />
+        <joint name="tt_model_0/rod20_21/slide_to" class="tt_model_0/rod20_21/" type="slide" axis="1 0 0" limited="true" range="-0.5 0.5" />
         <site name="tt_model_0/rod20_21/node_21" class="tt_model_0/rod20_21/" pos="-0.34999999999999998 0 0" />
         <geom name="tt_model_0/rod20_21/geom_edge_21" class="tt_model_0/rod20_21/" type="sphere" condim="6" size="0.029999999999999999" rgba="0 0.90000000000000002 0 0.5" mass="0.011299999999999999" pos="-0.34999999999999998 0 0" />
       </body>
@@ -201,7 +201,7 @@
       <geom name="tt_model_0/rod22_23/geom_from" class="tt_model_0/rod22_23/" type="cylinder" size="0.012" rgba="0.20000000000000001 0.20000000000000001 0.20000000000000001 0.59999999999999998" mass="0.01125" fromto="0.34999999999999998 0 0 0 0 0" />
       <body name="tt_model_0/rod22_23/body_to" pos="0 0 0">
         <geom name="tt_model_0/rod22_23/geom_to" class="tt_model_0/rod22_23/" type="cylinder" size="0.012" rgba="0.20000000000000001 0.20000000000000001 0.20000000000000001 0.59999999999999998" mass="0.01125" fromto="0 0 0 -0.34999999999999998 0 0" />
-        <joint name="tt_model_0/rod22_23/slide_to" class="tt_model_0/rod22_23/" type="slide" axis="1 0 0" limited="true" range="-10 10" />
+        <joint name="tt_model_0/rod22_23/slide_to" class="tt_model_0/rod22_23/" type="slide" axis="1 0 0" limited="true" range="-0.5 0.5" />
         <site name="tt_model_0/rod22_23/node_23" class="tt_model_0/rod22_23/" pos="-0.34999999999999998 0 0" />
         <geom name="tt_model_0/rod22_23/geom_edge_23" class="tt_model_0/rod22_23/" type="sphere" condim="6" size="0.029999999999999999" rgba="0 0.90000000000000002 0 0.5" mass="0.011299999999999999" pos="-0.34999999999999998 0 0" />
       </body>
@@ -213,12 +213,12 @@
     <body pos="0 0 0.38" name="tt_model_0/middle_platform/">
       <freejoint name="tt_model_0/middle_platform/" />
       <inertial pos="0 0 0" mass="0.69999999999999996" diaginertia="0.02 0.02 0.02" />
-      <site name="tt_model_0/middle_platform/node_37" class="tt_model_0/middle_platform/" pos="0.32500000000000001 0 0" />
-      <site name="tt_model_0/middle_platform/node_39" class="tt_model_0/middle_platform/" pos="0 0.32500000000000001 0" />
-      <site name="tt_model_0/middle_platform/node_40" class="tt_model_0/middle_platform/" pos="0 -0.32500000000000001 0" />
-      <site name="tt_model_0/middle_platform/node_41" class="tt_model_0/middle_platform/" pos="0 0 0.32500000000000007" />
-      <site name="tt_model_0/middle_platform/node_42" class="tt_model_0/middle_platform/" pos="0 0 -0.32500000000000001" />
-      <site name="tt_model_0/middle_platform/node_38" class="tt_model_0/middle_platform/" pos="-0.32500000000000001 0 0" />
+      <site name="tt_model_0/middle_platform/node_38" class="tt_model_0/middle_platform/" pos="-0.34000000000000002 0 0" />
+      <site name="tt_model_0/middle_platform/node_39" class="tt_model_0/middle_platform/" pos="0 0.34000000000000002 0" />
+      <site name="tt_model_0/middle_platform/node_40" class="tt_model_0/middle_platform/" pos="0 -0.34000000000000002 0" />
+      <site name="tt_model_0/middle_platform/node_41" class="tt_model_0/middle_platform/" pos="0 0 0.33999999999999997" />
+      <site name="tt_model_0/middle_platform/node_42" class="tt_model_0/middle_platform/" pos="0 0 -0.34000000000000002" />
+      <site name="tt_model_0/middle_platform/node_37" class="tt_model_0/middle_platform/" pos="0.34000000000000002 0 0" />
       <site name="tt_model_0/middle_platform/outside_site" class="tt_model_0/middle_platform/" rgba="1 0.90000000000000002 0 0.5" size="0.20000000000000001" pos="0 0 0" />
       <body name="tt_model_0/middle_platform/inside_ball" pos="0 0 0">
         <inertial pos="0 0 0" mass="6.5999999999999996" diaginertia="0.12 0.12 0.12" />
@@ -298,51 +298,51 @@
     <exclude name="tt_model_0/exclude_rod20_21_rod22_23" body1="tt_model_0/rod20_21/" body2="tt_model_0/rod22_23/" />
   </contact>
   <tendon>
-    <spatial name="tt_model_0/spatial_bar_string_0_1" class="tt_model_0/" width="0.002" rgba="1 1 1 1" springlength="1.1101219330881975" stiffness="1000">
+    <spatial name="tt_model_0/spatial_bar_string_0_1" class="tt_model_0/" width="0.002" rgba="1 1 1 1" springlength="1.1101219330881975" stiffness="1000" damping="100">
       <site site="tt_model_0/rod0_1/node_0" />
       <site site="tt_model_0/rod0_1/node_1" />
     </spatial>
-    <spatial name="tt_model_0/spatial_bar_string_2_3" class="tt_model_0/" width="0.002" rgba="1 1 1 1" springlength="1.1101219330881975" stiffness="1000">
+    <spatial name="tt_model_0/spatial_bar_string_2_3" class="tt_model_0/" width="0.002" rgba="1 1 1 1" springlength="1.1101219330881975" stiffness="1000" damping="100">
       <site site="tt_model_0/rod2_3/node_2" />
       <site site="tt_model_0/rod2_3/node_3" />
     </spatial>
-    <spatial name="tt_model_0/spatial_bar_string_4_5" class="tt_model_0/" width="0.002" rgba="1 1 1 1" springlength="1.1101219330881975" stiffness="1000">
+    <spatial name="tt_model_0/spatial_bar_string_4_5" class="tt_model_0/" width="0.002" rgba="1 1 1 1" springlength="1.1101219330881975" stiffness="1000" damping="100">
       <site site="tt_model_0/rod4_5/node_4" />
       <site site="tt_model_0/rod4_5/node_5" />
     </spatial>
-    <spatial name="tt_model_0/spatial_bar_string_6_7" class="tt_model_0/" width="0.002" rgba="1 1 1 1" springlength="1.1101219330881975" stiffness="1000">
+    <spatial name="tt_model_0/spatial_bar_string_6_7" class="tt_model_0/" width="0.002" rgba="1 1 1 1" springlength="1.1101219330881975" stiffness="1000" damping="100">
       <site site="tt_model_0/rod6_7/node_6" />
       <site site="tt_model_0/rod6_7/node_7" />
     </spatial>
-    <spatial name="tt_model_0/spatial_bar_string_8_9" class="tt_model_0/" width="0.002" rgba="1 1 1 1" springlength="1.1101219330881975" stiffness="1000">
+    <spatial name="tt_model_0/spatial_bar_string_8_9" class="tt_model_0/" width="0.002" rgba="1 1 1 1" springlength="1.1101219330881975" stiffness="1000" damping="100">
       <site site="tt_model_0/rod8_9/node_8" />
       <site site="tt_model_0/rod8_9/node_9" />
     </spatial>
-    <spatial name="tt_model_0/spatial_bar_string_10_11" class="tt_model_0/" width="0.002" rgba="1 1 1 1" springlength="1.1101219330881975" stiffness="1000">
+    <spatial name="tt_model_0/spatial_bar_string_10_11" class="tt_model_0/" width="0.002" rgba="1 1 1 1" springlength="1.1101219330881975" stiffness="1000" damping="100">
       <site site="tt_model_0/rod10_11/node_10" />
       <site site="tt_model_0/rod10_11/node_11" />
     </spatial>
-    <spatial name="tt_model_0/spatial_bar_string_12_13" class="tt_model_0/" width="0.002" rgba="1 1 1 1" springlength="1.1101219330881975" stiffness="1000">
+    <spatial name="tt_model_0/spatial_bar_string_12_13" class="tt_model_0/" width="0.002" rgba="1 1 1 1" springlength="1.1101219330881975" stiffness="1000" damping="100">
       <site site="tt_model_0/rod12_13/node_12" />
       <site site="tt_model_0/rod12_13/node_13" />
     </spatial>
-    <spatial name="tt_model_0/spatial_bar_string_14_15" class="tt_model_0/" width="0.002" rgba="1 1 1 1" springlength="1.1101219330881975" stiffness="1000">
+    <spatial name="tt_model_0/spatial_bar_string_14_15" class="tt_model_0/" width="0.002" rgba="1 1 1 1" springlength="1.1101219330881975" stiffness="1000" damping="100">
       <site site="tt_model_0/rod14_15/node_14" />
       <site site="tt_model_0/rod14_15/node_15" />
     </spatial>
-    <spatial name="tt_model_0/spatial_bar_string_16_17" class="tt_model_0/" width="0.002" rgba="1 1 1 1" springlength="1.1101219330881975" stiffness="1000">
+    <spatial name="tt_model_0/spatial_bar_string_16_17" class="tt_model_0/" width="0.002" rgba="1 1 1 1" springlength="1.1101219330881975" stiffness="1000" damping="100">
       <site site="tt_model_0/rod16_17/node_16" />
       <site site="tt_model_0/rod16_17/node_17" />
     </spatial>
-    <spatial name="tt_model_0/spatial_bar_string_18_19" class="tt_model_0/" width="0.002" rgba="1 1 1 1" springlength="1.1101219330881975" stiffness="1000">
+    <spatial name="tt_model_0/spatial_bar_string_18_19" class="tt_model_0/" width="0.002" rgba="1 1 1 1" springlength="1.1101219330881975" stiffness="1000" damping="100">
       <site site="tt_model_0/rod18_19/node_18" />
       <site site="tt_model_0/rod18_19/node_19" />
     </spatial>
-    <spatial name="tt_model_0/spatial_bar_string_20_21" class="tt_model_0/" width="0.002" rgba="1 1 1 1" springlength="1.1101219330881975" stiffness="1000">
+    <spatial name="tt_model_0/spatial_bar_string_20_21" class="tt_model_0/" width="0.002" rgba="1 1 1 1" springlength="1.1101219330881975" stiffness="1000" damping="100">
       <site site="tt_model_0/rod20_21/node_20" />
       <site site="tt_model_0/rod20_21/node_21" />
     </spatial>
-    <spatial name="tt_model_0/spatial_bar_string_22_23" class="tt_model_0/" width="0.002" rgba="1 1 1 1" springlength="1.1101219330881975" stiffness="1000">
+    <spatial name="tt_model_0/spatial_bar_string_22_23" class="tt_model_0/" width="0.002" rgba="1 1 1 1" springlength="1.1101219330881975" stiffness="1000" damping="100">
       <site site="tt_model_0/rod22_23/node_22" />
       <site site="tt_model_0/rod22_23/node_23" />
     </spatial>
@@ -538,99 +538,99 @@
       <site site="tt_model_0/rod14_15/node_15" />
       <site site="tt_model_0/rod18_19/node_19" />
     </spatial>
-    <spatial name="tt_model_0/td24_37" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.21160641115403986" stiffness="67000">
+    <spatial name="tt_model_0/td24_37" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.16508954709281848" stiffness="67000">
       <site site="tt_model_0/rod0_1/node_24" />
       <site site="tt_model_0/middle_platform/node_37" />
     </spatial>
-    <spatial name="tt_model_0/td28_37" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.21160641115403986" stiffness="67000">
+    <spatial name="tt_model_0/td28_37" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.16508954709281848" stiffness="67000">
       <site site="tt_model_0/rod8_9/node_28" />
       <site site="tt_model_0/middle_platform/node_37" />
     </spatial>
-    <spatial name="tt_model_0/td27_37" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.21160641115403986" stiffness="67000">
+    <spatial name="tt_model_0/td27_37" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.16508954709281848" stiffness="67000">
       <site site="tt_model_0/rod6_7/node_27" />
       <site site="tt_model_0/middle_platform/node_37" />
     </spatial>
-    <spatial name="tt_model_0/td29_37" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.21160641115403986" stiffness="67000">
+    <spatial name="tt_model_0/td29_37" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.16508954709281848" stiffness="67000">
       <site site="tt_model_0/rod10_11/node_29" />
       <site site="tt_model_0/middle_platform/node_37" />
     </spatial>
-    <spatial name="tt_model_0/td25_38" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.21160641115403986" stiffness="67000">
+    <spatial name="tt_model_0/td25_38" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.16508954709281848" stiffness="67000">
       <site site="tt_model_0/rod2_3/node_25" />
       <site site="tt_model_0/middle_platform/node_38" />
     </spatial>
-    <spatial name="tt_model_0/td31_38" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.21160641115403986" stiffness="67000">
+    <spatial name="tt_model_0/td31_38" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.16508954709281848" stiffness="67000">
       <site site="tt_model_0/rod14_15/node_31" />
       <site site="tt_model_0/middle_platform/node_38" />
     </spatial>
-    <spatial name="tt_model_0/td26_38" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.21160641115403986" stiffness="67000">
+    <spatial name="tt_model_0/td26_38" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.16508954709281848" stiffness="67000">
       <site site="tt_model_0/rod4_5/node_26" />
       <site site="tt_model_0/middle_platform/node_38" />
     </spatial>
-    <spatial name="tt_model_0/td30_38" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.21160641115403986" stiffness="67000">
+    <spatial name="tt_model_0/td30_38" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.16508954709281848" stiffness="67000">
       <site site="tt_model_0/rod12_13/node_30" />
       <site site="tt_model_0/middle_platform/node_38" />
     </spatial>
-    <spatial name="tt_model_0/td35_39" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.21160641115403986" stiffness="67000">
+    <spatial name="tt_model_0/td35_39" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.16508954709281848" stiffness="67000">
       <site site="tt_model_0/rod22_23/node_35" />
       <site site="tt_model_0/middle_platform/node_39" />
     </spatial>
-    <spatial name="tt_model_0/td25_39" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.21160641115403986" stiffness="67000">
+    <spatial name="tt_model_0/td25_39" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.16508954709281848" stiffness="67000">
       <site site="tt_model_0/rod2_3/node_25" />
       <site site="tt_model_0/middle_platform/node_39" />
     </spatial>
-    <spatial name="tt_model_0/td32_39" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.21160641115403986" stiffness="67000">
+    <spatial name="tt_model_0/td32_39" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.16508954709281848" stiffness="67000">
       <site site="tt_model_0/rod16_17/node_32" />
       <site site="tt_model_0/middle_platform/node_39" />
     </spatial>
-    <spatial name="tt_model_0/td24_39" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.21160641115403986" stiffness="67000">
+    <spatial name="tt_model_0/td24_39" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.16508954709281848" stiffness="67000">
       <site site="tt_model_0/rod0_1/node_24" />
       <site site="tt_model_0/middle_platform/node_39" />
     </spatial>
-    <spatial name="tt_model_0/td34_40" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.21160641115403986" stiffness="67000">
+    <spatial name="tt_model_0/td34_40" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.16508954709281848" stiffness="67000">
       <site site="tt_model_0/rod20_21/node_34" />
       <site site="tt_model_0/middle_platform/node_40" />
     </spatial>
-    <spatial name="tt_model_0/td26_40" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.21160641115403986" stiffness="67000">
+    <spatial name="tt_model_0/td26_40" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.16508954709281848" stiffness="67000">
       <site site="tt_model_0/rod4_5/node_26" />
       <site site="tt_model_0/middle_platform/node_40" />
     </spatial>
-    <spatial name="tt_model_0/td33_40" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.21160641115403986" stiffness="67000">
+    <spatial name="tt_model_0/td33_40" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.16508954709281848" stiffness="67000">
       <site site="tt_model_0/rod18_19/node_33" />
       <site site="tt_model_0/middle_platform/node_40" />
     </spatial>
-    <spatial name="tt_model_0/td27_40" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.21160641115403986" stiffness="67000">
+    <spatial name="tt_model_0/td27_40" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.16508954709281848" stiffness="67000">
       <site site="tt_model_0/rod6_7/node_27" />
       <site site="tt_model_0/middle_platform/node_40" />
     </spatial>
-    <spatial name="tt_model_0/td32_41" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.21160641115403986" stiffness="67000">
+    <spatial name="tt_model_0/td32_41" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.16508954709281848" stiffness="67000">
       <site site="tt_model_0/rod16_17/node_32" />
       <site site="tt_model_0/middle_platform/node_41" />
     </spatial>
-    <spatial name="tt_model_0/td31_41" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.21160641115403986" stiffness="67000">
+    <spatial name="tt_model_0/td31_41" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.16508954709281848" stiffness="67000">
       <site site="tt_model_0/rod14_15/node_31" />
       <site site="tt_model_0/middle_platform/node_41" />
     </spatial>
-    <spatial name="tt_model_0/td33_41" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.21160641115403986" stiffness="67000">
+    <spatial name="tt_model_0/td33_41" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.16508954709281848" stiffness="67000">
       <site site="tt_model_0/rod18_19/node_33" />
       <site site="tt_model_0/middle_platform/node_41" />
     </spatial>
-    <spatial name="tt_model_0/td28_41" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.21160641115403986" stiffness="67000">
+    <spatial name="tt_model_0/td28_41" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.16508954709281848" stiffness="67000">
       <site site="tt_model_0/rod8_9/node_28" />
       <site site="tt_model_0/middle_platform/node_41" />
     </spatial>
-    <spatial name="tt_model_0/td35_42" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.21160641115403986" stiffness="67000">
+    <spatial name="tt_model_0/td35_42" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.16508954709281848" stiffness="67000">
       <site site="tt_model_0/rod22_23/node_35" />
       <site site="tt_model_0/middle_platform/node_42" />
     </spatial>
-    <spatial name="tt_model_0/td30_42" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.21160641115403986" stiffness="67000">
+    <spatial name="tt_model_0/td30_42" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.16508954709281848" stiffness="67000">
       <site site="tt_model_0/rod12_13/node_30" />
       <site site="tt_model_0/middle_platform/node_42" />
     </spatial>
-    <spatial name="tt_model_0/td29_42" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.21160641115403986" stiffness="67000">
+    <spatial name="tt_model_0/td29_42" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.16508954709281848" stiffness="67000">
       <site site="tt_model_0/rod10_11/node_29" />
       <site site="tt_model_0/middle_platform/node_42" />
     </spatial>
-    <spatial name="tt_model_0/td34_42" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.21160641115403986" stiffness="67000">
+    <spatial name="tt_model_0/td34_42" class="tt_model_0/" rgba="1 1 0 0.69999999999999996" springlength="0.16508954709281848" stiffness="67000">
       <site site="tt_model_0/rod20_21/node_34" />
       <site site="tt_model_0/middle_platform/node_42" />
     </spatial>
@@ -649,6 +649,6 @@
     <accelerometer name="tt_model_0//unnamed_sensor_6" site="tt_model_0/middle_platform/inside_site" />
   </sensor>
   <keyframe>
-    <key name="tt_model_0/initial_state" time="0" qpos="0.1777248876184195 0.17871364604249643 0.3792234996618416 0.9998682034657528 -0.0028857340801686842 0.0024950577004722906 -0.015780460197968835 0.0007623062607392006 -0.17955106104393848 0.1794029613851162 0.3788329530778347 0.9999904913239497 -0.0019732546602315715 0.0027785369346358863 0.002720893278764157 0.0011550470713616368 -0.18020112812804995 -0.1787202308845257 0.3796133493907231 0.9999932583595152 7.115491887664387e-05 0.0008221496204479335 -0.0035780221491967207 0.00038225928533607695 0.17761373783313508 -0.17771146179729774 0.38009184139092617 0.9995154781657677 0.001148089963866456 0.00029107159552844156 -0.03110315215244199 -9.677961860741104e-05 0.17834244238951996 0.0018110027658734221 0.5576235001582404 0.12339049291319756 -0.0026259910995415706 0.9923545550227811 0.0005723241406204718 -0.004439109528494002 0.17970909082930409 0.0006762859434539546 0.19892990413963063 0.1528580897794619 0.0018093576789012414 -0.9882453961981945 -0.001472245508413624 -0.0037522855280834036 -0.1791719747377691 0.0008399536388387708 0.1987734394111752 -0.3834953701879767 0.00019934210616661305 -0.9235424909874115 -0.0007270817554857085 -0.004723253202058871 -0.17911173205648323 0.0019419557981234029 0.5562735478729322 0.4581393702002904 0.0009663229266255242 -0.888878527613942 0.0015319397355491118 -0.0053688881614889945 -1.3868277698079453e-05 0.18083271905733728 0.5575702429956084 0.8615069836150356 0.5077371845188147 0.0014188330202590132 -0.0025798357100986517 -0.004190483363137114 0.00010470321202782815 -0.17913027066199863 0.5591576526692544 0.08971678724885104 -0.9959628352368741 -0.002926758994261628 0.0006024902175804207 -0.003939000732891843 0.0005686737276150611 -0.17927452251679096 0.20001147545639203 -0.9087103300684642 -0.41742260648002183 -0.0009695514060562135 -0.001721509906598787 -0.0048448626911801376 0.0003462840910585367 0.17921848399872695 0.19903774178812034 -0.9808986451061968 -0.19450593642854389 -0.001907499842014328 0.001284588351886323 -0.005150587494997945 -0.0004719303950533275 0.0005893702317744717 0.3783742630143272 0.9999984198026597 -0.001493220497043914 -0.0009541719540561698 -0.00014226950737113406 0.0029863546510624137 0.0019087541427698445 0.0002817243773618695" qvel="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 70 0 0" ctrl="-90 0" />
+    <key name="tt_model_0/initial_state" time="0" qpos="0.17554955172722259 0.17337078244614373 0.3751517680415838 0.9999918498439051 0.002813967610480962 0.0028942836915218655 7.038441332889365e-05 0.004833024115484466 -0.17449836475423763 0.1735161543340991 0.3746852876911241 0.9999931368257882 0.0032682100973629408 0.00161019474581746 0.0006725897408328254 0.0053017312054390265 -0.17448185419736212 -0.17636249442175023 0.37499036163823257 0.9999955662796652 0.00296527374629299 0.0002220928149707599 -0.0001588943133258029 0.00499956611023843 0.1751760432079302 -0.17625356149864022 0.3754795186143821 0.9999880613264985 0.004707419901489304 0.0012514241484834201 -0.00038902434823422197 0.004500099812665702 0.17555390252570258 -0.0015600023899195229 0.5501534942995616 0.9868345295117622 0.001940417599627748 0.16169634700721863 0.0028526316549051726 -0.0006775424078181364 0.17628399676951417 -0.0017476000040129388 0.20007970275785672 -0.1889329544385199 -0.0011878945545113376 0.9819859047674312 0.0025710837689975684 0.0006630612256559821 -0.17376155786148775 -0.001670105868135314 0.19974505302434692 0.39823557396822 -0.0004932346787847893 0.9172812362998365 0.0018215043228502475 3.8483811881754436e-05 -0.17421855356590127 -0.001450845466561407 0.5492708817116713 0.9999591701412637 0.001103190000760217 0.008513998684029796 0.0028200795423457157 -0.0008499416112921469 0.00045307344809034734 0.17379275442218553 0.5500417299718708 0.9795868873792639 0.201005602477384 0.0020748682864335706 -0.001404552918878176 -0.0005306959708032912 0.00046996191169910843 -0.17688501350453725 0.5506369788701458 0.6137641808361022 -0.7894871631415179 -0.0014027348269663928 0.0012577330207268118 0.0005791475190513742 0.0009329813936757815 -0.1768361331013909 0.20056724543946755 0.18032981031835887 0.9836053414528739 0.001229939378669867 -0.00042311351115979193 -0.0003100941859621312 0.0009318701758741231 0.17267921076428525 0.20034582966450679 -0.07430556550378306 0.997232381841352 -0.00021899211810402032 -0.002492305085459938 -0.0008603849056975868 0.0006841892546052163 -0.0016205018340986193 0.37496903156881056 0.9999994787960006 -0.0006004347250095586 -0.0008166074732866146 -0.00012262994116356697 0.001200728039916125 0.0016333206140183101 0.0002443212837190814" qvel="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 70 0 0" ctrl="-90 0" />
   </keyframe>
 </mujoco>
