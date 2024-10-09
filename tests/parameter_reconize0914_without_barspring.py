@@ -239,7 +239,6 @@ def plot_recognize_result(result_file='./tests/0914_parameter_reconize'):
         # 生成拟合曲线的数据  
         x_fit = np.linspace(min(line_number_list), max(line_number_list), 100)  
         y_fit = spline(x_fit)  
-        
         # 绘制拟合曲线  
         plt.plot(x_fit, y_fit, color='red', label='Spline Fit')  
         plt.title(title)  
@@ -369,7 +368,7 @@ def recognize_parameter_first_1_seconds_and_all_parameter(logger_path='./tests/0
     print('total time: ', time.time() - start_time)
 
 if __name__ == '__main__':
-    # logger_path='./tests/0915/recognize_parameter_first_1_seconds_and_all_parameter_5'
+    logger_path='./tests/0915/recognize_parameter_first_1_seconds_and_all_parameter_5'
     # recognize_parameter_first_0_35_seconds_and_only_height()
     # recognize_parameter_first_1_seconds_and_all_parameter(logger_path)
     # plot_recognize_result(logger_path)
@@ -380,18 +379,18 @@ if __name__ == '__main__':
     # result = {'d0': 0.9433598140425187, 'd_width': 0.1395079405492468, 'width': 0.05208016638200587, 'stiffness': 4724.630709636312, 'damping': 91.11742334723378, 'rolling_friction': 0.5985903152412875, 'torsional_friction': 0.02774301352299431}
     # 损失函数大修
     # result =  {'d0': 0.3918458065047926, 'd_width': 0.06777539040324305, 'width': 0.004479947147087014, 'stiffness': 2045.9038525093313, 'damping': 100.19218200606545, 'rolling_friction': 0.5706360673627742, 'torsional_friction': 0.02266737747778054}
-    result = {'d0': 0.9698819142575082, 'd_width': 0.10222059345169457, 'width': 0.055102813760108824, 'stiffness': 4360.38894615363, 'damping': 138.02062726106232, 'rolling_friction': 0.5391332783891921, 'torsional_friction': 0.019243073269965646}
-    xlsx_path = './tests/data_to_fit_large_stiffness.xlsx'
-    d0 = result['d0']
-    d_width = result['d_width']
-    width = result['width']
-    stiffness = result['stiffness']
-    damping = result['damping']
-    rolling_friction = result['rolling_friction']
-    torsional_friction = result['torsional_friction']
-    param_reconize = ParameterReconize(adams_data_path=xlsx_path, z_list=[165, 162, 160, 150], first_few_seconds=1, stop_time=1)
+    # result = {'d0': 0.9698819142575082, 'd_width': 0.10222059345169457, 'width': 0.055102813760108824, 'stiffness': 4360.38894615363, 'damping': 138.02062726106232, 'rolling_friction': 0.5391332783891921, 'torsional_friction': 0.019243073269965646}
+    # xlsx_path = './tests/data_to_fit_large_stiffness.xlsx'
+    # d0 = result['d0']
+    # d_width = result['d_width']
+    # width = result['width']
+    # stiffness = result['stiffness']
+    # damping = result['damping']
+    # rolling_friction = result['rolling_friction']
+    # torsional_friction = result['torsional_friction']
+    # param_reconize = ParameterReconize(adams_data_path=xlsx_path, z_list=[165, 162, 160, 150], first_few_seconds=1, stop_time=1)
     
-    param_reconize.simulate_with_specific_parameter(index=0, stiffness=stiffness, damping=damping, d0=d0, d_width=d_width, width=width, rolling_friction=rolling_friction, torsional_friction=torsional_friction, stop_time=10,is_render=True)
+    # param_reconize.simulate_with_specific_parameter(index=0, stiffness=stiffness, damping=damping, d0=d0, d_width=d_width, width=width, rolling_friction=rolling_friction, torsional_friction=torsional_friction, stop_time=10,is_render=True)
     # param_reconize.plot_adams_df(choice='adams_df_list_first_few_seconds')
     # param_reconize.plot_simulated_data(stiffness=stiffness, damping=damping, d0=d0, d_width=d_width, width=width, rolling_friction=rolling_friction, torsional_friction=torsional_friction, stop_time=1.5)
     # print(param_reconize.loss_function_for_all_z_and_all_parameter_in_all_time(d0=d0, d_width=d_width, width=width, stiffness=stiffness, damping=damping, rolling_friction=rolling_friction, torsional_friction=torsional_friction))

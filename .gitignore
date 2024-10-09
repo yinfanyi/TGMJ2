@@ -13,7 +13,21 @@ data/csv/output*
 # data/png/
 tests/launch
 tests/09*
+tests/10*
+data/csv/09*/
+data/xml/09*/
 
+!tests/1008/
+tests/1008/tmp*
+tests/1008/f1
+tests/1008/f21
+tests/1008/k1
+tests/1008/k2
+tests/1008/k3
+tests/1008/k4
+tests/1008/k5
+tests/1008/k6
+tests/1008/k7
 
 other/
 dist/

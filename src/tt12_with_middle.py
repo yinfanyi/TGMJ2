@@ -3,7 +3,7 @@
 """
 
 import xml.etree.ElementTree as ET
-from typing import Optional,Dict,Optional, List
+from typing import Optional,Dict, List
 import re
 import ast
 

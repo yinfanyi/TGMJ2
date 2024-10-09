@@ -861,7 +861,7 @@ class TT12_Control():
             return m, d
         mj_viewer.launch(loader=load_callback)
 
-def cal_ori_length(z=165, f1=100, f2=290, length1=0.35, length2=0.35/2*np.sqrt(2), length3=np.sqrt(175**2+165**2)*0.001):
+def cal_ori_length(z=165, f1=100, f2=290, length1=0.35, length2=0.35/2*np.sqrt(2), length3=np.sqrt(175**2 + 165**2)*0.001):
     a=350/2
     f3 = (f2/np.sqrt(2) - f1)*2*np.sqrt(a**2+z**2)/(a-z)
     # print(f3)
